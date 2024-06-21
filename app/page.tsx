@@ -121,7 +121,7 @@ export default function Home() {
         <section className="bg-no-repeat flex flex-col items-center p-4 bg-color-two">
           <h2 className="font-bold text-2xl  text-white">What Our Users Say</h2>
           <div className="flex flex-col items-start">
-            <p className={`${poller.className}`}>"</p>
+            <p className={`${poller.className}`}>&quot;</p>
             <p className="text-center">Taskify transformed my hectic pharmacy school schedule into a well-organized plan, helping me manage classes, assignments, and study sessions effortlessly</p>
             <div className="flex justify-between items-center">
               <Image 
