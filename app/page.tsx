@@ -61,7 +61,7 @@ export default function Home() {
               <h3 className="font-bold text-xl text-color-one">Easy task creation</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Quickly add tasks with our intuitive interface.</p>
               <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
-                Let's Go
+                Let&apos;s Go
                 <Image 
                 src={"/images/arrow-right.svg"}
                 alt="arrow-icon"
@@ -85,7 +85,7 @@ export default function Home() {
               <h3 className="font-bold text-xl text-color-one">Efficient Task Management</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Manage tasks effortlessly with Taskify.</p>
               <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
-                Let's Go
+                Let&apos;s Go
                 <Image 
                 src={"/images/arrow-right.svg"}
                 alt="arrow-icon"
@@ -108,7 +108,7 @@ export default function Home() {
               <h3 className="font-bold text-xl text-color-one">Secure Aunthentication</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Keep your tasks safe and accessible.</p>
               <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
-                Let's Go
+                Let&apos;s Go
                 <Image 
                 src={"/images/arrow-right.svg"}
                 alt="arrow-icon"
