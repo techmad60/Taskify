@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interFont, poppinsFont } from "../fonts/fonts";
+import { interFont, poppinsFont, poller } from "../fonts/fonts";
 
 export default function Home() {
   return (
@@ -45,7 +45,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-hero-vector bg-no-repeat flex flex-col items-center p-4">
+        <section className="bg-hero-vector bg-no-repeat flex flex-col items-center p-4 features">
         <h2 className="font-bold text-2xl mt-24 text-color-one">Why Choose Taskify</h2>
           <article className="mt-8">
             <div>
@@ -117,6 +117,25 @@ export default function Home() {
               </button>
             </div>
           </article>
+        </section>
+        <section className="bg-no-repeat flex flex-col items-center p-4 bg-color-two">
+          <h2 className="font-bold text-2xl  text-white">What Our Users Say</h2>
+          <div className="flex flex-col items-start">
+            <p className={`${poller.className}`}>"</p>
+            <p className="text-center">Taskify transformed my hectic pharmacy school schedule into a well-organized plan, helping me manage classes, assignments, and study sessions effortlessly</p>
+            <div className="flex justify-between items-center">
+              <Image 
+                src={"/images/avatar-one.png"}
+                alt="Avatar"
+                width={70}
+                height={70}
+                />
+              <div>
+                <p>Favour Nnabuife</p>
+                <p>Pharmacy, 300lvl.</p>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
     </>

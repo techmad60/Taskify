@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "hero-vector": "url('/images/hero-vector.svg')",
+        "features-vector": "url('/images/features-vector.svg')",
+        "testimonial-vector": "url('/images/testimonial-vector.svg')",
+        "footer-vector": "url('/images/footer-vector.svg')",
       },
       colors: {
         "primary-color": "#81CAFB",
