@@ -9,10 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "hero-vector": "url('/images/hero-vector.svg')",
       },
+      colors: {
+        "primary-color": "#81CAFB",
+        "color-one": "#2C3E50",
+        "color-two": "#1A252F",
+      },
+      
     },
   },
   plugins: [],
