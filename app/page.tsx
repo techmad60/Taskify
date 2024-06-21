@@ -38,15 +38,85 @@ export default function Home() {
           </div>
           <div>
             <h1 className={`font-bold text-[32px] text-primary-color`}>Stay Organized, Achieve More with Taskify</h1>
-            <p className={`${poppinsFont.className} text-sm text-white font-normal py-6`}>Taskify is your ultimate task management tool designed to help you stay on top of your to-do list. Effortlessly add, manage, and complete tasks with our intuitive interface. Sign up now to start boosting your productivity!</p>
-            <button className="bg-primary-color text-color-one py-1 px-2 rounded-md">
-            <a className={`text-lg rounded-sm font-bold`}>Get started</a>
+            <p className={`${poppinsFont.className} text-sm text-slate-200 font-normal py-6`}>Taskify is your ultimate task management tool designed to help you stay on top of your to-do list. Effortlessly add, manage, and complete tasks with our intuitive interface. Sign up now to start boosting your productivity!</p>
+            <button className="bg-primary-color text-color-one py-1 px-2 rounded-sm text-lg font-bold">
+              Get started
             </button>
           </div>
         </section>
 
-        <section className="bg-hero-vector bg-no-repeat flex flex-col items-center">
+        <section className="bg-hero-vector bg-no-repeat flex flex-col items-center p-4">
         <h2 className="font-bold text-2xl mt-24 text-color-one">Why Choose Taskify</h2>
+          <article className="mt-8">
+            <div>
+              <Image 
+              src={"/images/add-tasks.svg"}
+              alt="Add-tasks Illustration"
+              width={375}
+              height={269}
+              />
+            </div>
+
+            <div className="flex flex-col items-center text-center py-4">
+              <h3 className="font-bold text-xl text-color-one">Easy task creation</h3>
+              <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Quickly add tasks with our intuitive interface.</p>
+              <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
+                Let's Go
+                <Image 
+                src={"/images/arrow-right.svg"}
+                alt="arrow-icon"
+                width={20}
+                height={24}/>
+              </button>
+            </div>
+          </article>
+
+          <article className="mt-8">
+            <div>
+              <Image 
+              src={"/images/manage-tasks.svg"}
+              alt="Manage-tasks Illustration"
+              width={347}
+              height={314}
+              />
+            </div>
+
+            <div className="flex flex-col items-center text-center py-4">
+              <h3 className="font-bold text-xl text-color-one">Efficient Task Management</h3>
+              <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Manage tasks effortlessly with Taskify.</p>
+              <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
+                Let's Go
+                <Image 
+                src={"/images/arrow-right.svg"}
+                alt="arrow-icon"
+                width={20}
+                height={24}/>
+              </button>
+            </div>
+          </article>
+          <article className="mt-8">
+            <div>
+              <Image 
+              src={"/images/authentication.svg"}
+              alt="Aunthentication Illustration"
+              width={374}
+              height={289}
+              />
+            </div>
+
+            <div className="flex flex-col items-center text-center py-4">
+              <h3 className="font-bold text-xl text-color-one">Secure Aunthentication</h3>
+              <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Keep your tasks safe and accessible.</p>
+              <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
+                Let's Go
+                <Image 
+                src={"/images/arrow-right.svg"}
+                alt="arrow-icon"
+                width={20}
+                height={24}/>
+              </button>
+            </div>
+          </article>
         </section>
       </main>
     </>
