@@ -6,21 +6,19 @@ body {
     background-color: rgba(217, 217, 217, 1);
 }
 
-.features {
+/* .features {
     position: relative;
-    padding-bottom: 120px; /* Adjust if necessary to create space for the image */
+    padding-bottom: 120px; 
   }
   
   .features::after {
     content: '';
-    display: block;
-    background: url('/images/features-vector.svg') no-repeat center center;
+    background: url('/images/features-vector.svg') no-repeat;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 70px; /* Adjust height as necessary */
-    background-size: contain; /* Or adjust to fit your design */
-    z-index: 0; /* Ensure it doesn't overlap content */
+    height: 70px;
+    z-index: 0; 
   }
-  
+   */

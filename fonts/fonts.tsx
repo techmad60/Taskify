@@ -1,4 +1,4 @@
-import { Inter, Poppins, Poller_One } from 'next/font/google';
+import { Inter, Poppins, Style_Script } from 'next/font/google';
  
 export const interFont = Inter({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -12,10 +12,10 @@ export const poppinsFont = Poppins({
   display: 'swap',
 })
 
-export const poller = Poller_One({
+export const stylex = Style_Script({
   weight: [ '400'],
   subsets: ['latin'],
-  display: 'swap',
+  
 })
    
 
