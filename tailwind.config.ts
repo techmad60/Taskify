@@ -12,7 +12,9 @@ const config: Config = {
         "hero-vector": "url('/images/hero-vector.svg')",
         "features-vector": "url('/images/features-vector.svg')",
         "testimonial-vector": "url('/images/testimonial-vector.svg')",
+        "desktop-hero": "url('/images/desktop-hero.svg')",
         "footer-vector": "url('/images/footer-vector.svg')",
+        "desktop-testimonial": "url('/images/desktop-testimonial.svg')",
       },
       colors: {
         "primary-color": "#81CAFB",
