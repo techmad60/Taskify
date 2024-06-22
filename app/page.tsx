@@ -213,6 +213,7 @@ export default function Home() {
               height={30}/>
           </a>
         </div>
+        <p className={`${poppinsFont.className} text-center text-xs text-white mt-12`}>Designed and built with love by <span className="text-primary-color">Techmad</span> </p>
       </footer>
     </>
     
