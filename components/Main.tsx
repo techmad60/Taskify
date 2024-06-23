@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { interFont, poppinsFont, stylex } from "../fonts/fonts";
+import Button from "./Button";
 
 export default function Main() {
     return (
         <main className={`${interFont.className}`}>
-        <section className="flex flex-col items-center text-center bg-color-one p-4 justify-center sm:p-8 lg:flex-row-reverse lg:px-16">
+        <section className="flex flex-col items-center text-center bg-color-one p-4 justify-center sm:p-8 lg:flex-row-reverse lg:px-16 ">
           <div>
             <Image 
-              className="lg:w-[454px] h-[424px]"
+              className="lg:w-[454px]"
               src={"/images/hero-img.svg"}
               alt="hero-img"
               width={275}
@@ -37,14 +38,7 @@ export default function Main() {
             <div className="flex flex-col items-center text-center py-4">
               <h3 className="font-bold text-xl text-color-one">Easy task creation</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Quickly add tasks with our intuitive interface.</p>
-              <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
-                Let&apos;s Go
-                <Image 
-                src={"/images/arrow-right.svg"}
-                alt="arrow-icon"
-                width={20}
-                height={24}/>
-              </button>
+              <Button />
             </div>
           </article>
 
@@ -61,14 +55,7 @@ export default function Main() {
             <div className="flex flex-col items-center text-center py-4">
               <h3 className="font-bold text-xl text-color-one">Efficient Task Management</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Manage tasks effortlessly with Taskify.</p>
-              <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
-                Let&apos;s Go
-                <Image 
-                src={"/images/arrow-right.svg"}
-                alt="arrow-icon"
-                width={20}
-                height={24}/>
-              </button>
+              <Button />
             </div>
           </article>
           <article className="mt-8 flex flex-col items-center lg:flex-row">
@@ -84,14 +71,7 @@ export default function Main() {
             <div className="flex flex-col items-center text-center py-4">
               <h3 className="font-bold text-xl text-color-one">Secure Aunthentication</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Keep your tasks safe and accessible.</p>
-              <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
-                Let&apos;s Go
-                <Image 
-                src={"/images/arrow-right.svg"}
-                alt="arrow-icon"
-                width={20}
-                height={24}/>
-              </button>
+              <Button />
             </div>
           </article>
         </section>
@@ -127,14 +107,7 @@ export default function Main() {
             <div className="flex flex-col items-center text-center">
               <h2 className="font-bold text-2xl  text-color-one pt-12">Try Taskify Today!</h2>
               <p className={`${poppinsFont.className} text-slate-700 text-sm px-16 py-4`}> Taskify - Organize your life, achieve more.</p>
-              <button className="inline-flex items-center bg-primary-color text-color-one p-2 rounded-sm text-sm">
-                Let&apos;s Go
-                <Image 
-                src={"/images/arrow-right.svg"}
-                alt="arrow-icon"
-                width={20}
-                height={24}/>
-              </button>
+              <Button />
             </div>
         </section>
       </main>
