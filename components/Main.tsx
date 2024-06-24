@@ -4,7 +4,7 @@ import Button from "./Button";
 
 export default function Main() {
     return (
-        <main className={`${interFont.className}`}>
+      <main className={`${interFont.className}`}>
         <section className="flex flex-col items-center text-center bg-color-one p-4 justify-center sm:p-8 lg:flex-row-reverse lg:px-16 ">
           <div>
             <Image 
