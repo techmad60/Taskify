@@ -65,7 +65,7 @@ export default function Navbar () {
               height={30}/>
           </button>
           
-          <div className=" flex flex-col text-center leading-10 my-12 text-color-one text-xl lg:flex-row lg:text-base lg:space-x-6 lg:static lg:text-white">
+          <div className="flex flex-col text-center leading-[60px] my-12 text-color-one text-xl lg:flex-row lg:text-base lg:space-x-6 lg:static lg:text-white">
             <Link href="/" className=" hover:text-primary-color transition duration-150 hover:ease-in hover:border-b border-primary-color">
               Home
             </Link>
@@ -81,10 +81,10 @@ export default function Navbar () {
           </div>
 
           <div className="flex flex-col lg:hidden">
-            <Link href="/login" className="bg-primary-color px-4 py-1 mb-4  text-color-one rounded-sm hover:bg-sky-400 transition duration-150 hover:ease-in text-center text-xl">
+            <Link href="/login" className="bg-primary-color px-8 py-1 mb-6  text-color-one rounded-md hover:bg-sky-400 transition duration-150 hover:ease-in text-center text-xl">
               Login
             </Link>
-            <Link href="/signup" className=" text-primary-color border-2 border-primary-color rounded-sm px-4 py-1  hover:border-sky-400 hover:text-sky-400 transition duration-150 hover:ease-in text-xl">
+            <Link href="/signup" className=" text-primary-color border-2 border-primary-color rounded-md px-8 py-1  hover:border-sky-400 hover:text-sky-400 transition duration-150 hover:ease-in text-xl">
               Signup
             </Link>
           </div>
