@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { interFont, poppinsFont, stylex } from "../fonts/fonts";
 import Button from "./Button";
+import Carousel from "./Carousel";
 
 export default function Main() {
     return (
       <main className={`${interFont.className}`}>
-        <section className="flex flex-col items-center text-center bg-color-one p-4 justify-center sm:p-8 lg:flex-row-reverse lg:px-16 ">
+        <section className="flex flex-col items-center text-center bg-color-one p-4 justify-center sm:p-8 lg:flex-row-reverse lg:px-16 xl:gap-28">
           <div>
             <Image 
               className="lg:w-[454px]"
@@ -77,24 +78,7 @@ export default function Main() {
         </section>
         <section className="bg-no-repeat flex flex-col items-center p-4 bg-color-two mt-16">
           <h2 className="font-bold text-2xl  text-white py-12">What Our Users Say</h2>
-          <div className="overflow-x-auto flex space-x-4">
-            <div className="flex flex-col items-start bg-[#D9D9D9] w-[275px] h-[370px] p-8 rounded-md mt-4 mb-12">
-              <p className={`${stylex.className} text-6xl text-color-one`}>&quot;</p>
-              <p className={`${poppinsFont.className} text-center pb-8 text-sm`}>Taskify transformed my hectic pharmacy school schedule into a well-organized plan, helping me manage classes, assignments, and study sessions effortlessly.</p>
-              <div className="flex justify-between items-center gap-4">
-                <Image 
-                  src={"/images/avatar-one.png"}
-                  alt="Avatar"
-                  width={50}
-                  height={50}
-                  />
-                <div>
-                  <p className="font-bold text-sm text-color-one">Favour Nnabuife</p>
-                  <p className="text-sm">Pharmacy, 300lvl.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Carousel />
         </section>
         <section className="flex flex-col items-center pt-20 p-4 bg-testimonial-vector bg-no-repeat justify-center lg:bg-desktop-testimonial lg:flex-row">
           <Image 
