@@ -7,7 +7,7 @@ import HorizontalLine from "@/components/HorizontalLine";
 import GoogleButton from "@/components/GoogleButton";
 import { poppinsFont } from "@/fonts/fonts";
 
-export default function SignupPage() {
+export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   
   // Function to toggle password visibility
@@ -22,11 +22,9 @@ export default function SignupPage() {
       <Darklogo />
       <form className={`flex flex-col justify-center border border-color-one px-12 rounded-[10px] w-72`}>
         
-        <label className="pt-6 pb-1">Name</label>
-        <input type="text" name="name" required autoFocus className="border border-color-one rounded-[10px] py-2 px-4" />
         
         <label className="pt-6 pb-1">Email</label>
-        <input type="email" name="email" required className="border border-color-one rounded-[10px] py-2 px-4" />
+        <input type="email" name="email" required className="border border-color-one rounded-[10px] p-2" />
         
         {/* Password Field */}
         <label className="pt-6 pb-1">Password</label>
@@ -35,7 +33,7 @@ export default function SignupPage() {
             type={showPassword ? "text" : "password"} 
             name="password" 
             required 
-            className="border border-color-one rounded-[10px] py-2 px-4 w-full"
+            className="border border-color-one rounded-[10px] p-2 w-full" 
           />
           <button 
             type="button" 
@@ -46,27 +44,15 @@ export default function SignupPage() {
           </button>
         </div>
         
-        {/* Repeat Password Field */}
-        <label className="pt-6 pb-1">Repeat password</label>
-        <div className="relative">
-          <input 
-            type="password"
-            name="repeatpassword" 
-            required 
-            className="border border-color-one rounded-[10px] py-2 px-4 w-full"
-          />
-          
-        </div>
-
         <button type="submit" className="flex justify-center self-center text-sm bg-primary-color my-6 py-2 px-3 rounded-sm">
-          Sign up
+          Login
         </button>
       </form>
       <HorizontalLine />
       <GoogleButton text="Sign up" />
-      <p className="mt-8">Already have an account? 
-        <Link href = "/login">
-           <span className="text-primary-color cursor-pointer"> Login</span>
+      <p className="mt-8">Don't have an account? 
+        <Link href = "/signup">
+           <span className="text-primary-color cursor-pointer"> Sign up</span>
         </Link>
         
       </p>
