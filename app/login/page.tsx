@@ -50,7 +50,7 @@ export default function LoginPage() {
       </form>
       <HorizontalLine />
       <GoogleButton text="Sign up" />
-      <p className="mt-8">Don't have an account? 
+      <p className="mt-8">Don&apos;t have an account? 
         <Link href = "/signup">
            <span className="text-primary-color cursor-pointer"> Sign up</span>
         </Link>
