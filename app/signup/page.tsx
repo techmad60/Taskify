@@ -1,8 +1,7 @@
 // /app/signup/page.tsx
 import { poppinsFont } from "@/fonts/fonts";
 import Darklogo from "@/components/Darklogo";
-// import Image from "next/image";
-import HorizontalLine from "@/components/Horizontalline";
+import HorizontalLine from "@/components/HorizontalLine";
 import GoogleButton from "@/components/GoogleButton";
 export default function SignupPage() {
     return (
