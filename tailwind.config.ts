@@ -18,6 +18,7 @@ const config: Config = {
       },
       colors: {
         "primary-color": "#81CAFB",
+        "color-zero": "#D9D9D9",
         "color-one": "#2C3E50",
         "color-two": "#1A252F",
       },

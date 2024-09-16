@@ -81,10 +81,10 @@ export default function Navbar () {
         </div>
 
         <div className="flex flex-col lg:hidden">
-          <Link href="/login" className="bg-primary-color px-4 py-2 mb-6  text-color-one rounded-md hover:bg-sky-400 transition duration-150 hover:ease-in text-center text-xl">
+          <Link href="/login" className="bg-primary-color px-4 py-2 mb-6  text-color-one rounded-md hover:bg-sky-400 transition duration-150 hover:ease-in text-center text-lg">
             Login
           </Link>
-          <Link href="/signup" className=" text-primary-color border-2 border-primary-color rounded-md px-4 py-2  hover:border-sky-400 hover:text-sky-400 transition duration-150 hover:ease-in text-xl">
+          <Link href="/signup" className="bg-color-one text-primary-color rounded-md px-4 py-2  hover:border-sky-400 hover:text-sky-400 transition duration-150 hover:ease-in text-lg">
             Signup
           </Link>
         </div>

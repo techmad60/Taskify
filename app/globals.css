@@ -2,23 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
     background-color: rgba(217, 217, 217, 1);
-}
-
-/* .features {
-    position: relative;
-    padding-bottom: 120px; 
-  }
-  
-  .features::after {
-    content: '';
-    background: url('/images/features-vector.svg') no-repeat;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-    z-index: 0; 
-  }
-   */
+} */

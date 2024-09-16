@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interFont, poppinsFont, stylex } from "../fonts/fonts";
+import { interFont, poppinsFont, } from "../fonts/fonts";
 export default function Footer() {
     return(
         <footer className="bg-color-one flex flex-col items-center mt-16 p-4 py-12">
