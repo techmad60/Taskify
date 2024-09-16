@@ -5,7 +5,7 @@ export default function SignupPage() {
     return (
       <div className="flex flex-col justify-center items-center">
         <Darklogo />
-        <form className={`${poppinsFont.className} flex flex-col justify-center border border-color-one px-12 rounded-[10px]`}>
+        <form className={`${poppinsFont.className} flex flex-col justify-center border border-color-one px-12 rounded-[10px] w-72`}>
           <label className="text-sm text-color-one font-light pt-6 pb-1">Name</label>
           <input type="text" name="name" required className="border border-color-one rounded-[10px] py-1"/>
           
