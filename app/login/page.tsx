@@ -24,7 +24,7 @@ export default function LoginPage() {
         
         
         <label className="pt-6 pb-1">Email</label>
-        <input type="email" name="email" required className="border border-color-one rounded-[10px] p-2" />
+        <input type="email" name="email" required autoFocus className="border border-color-one rounded-[10px] p-2" />
         
         {/* Password Field */}
         <label className="pt-6 pb-1">Password</label>
