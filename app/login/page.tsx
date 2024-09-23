@@ -44,7 +44,7 @@ export default function LoginPage() {
           </button>
         </div>
         
-        <button type="submit" className="flex justify-center self-center text-sm bg-primary-color duration-300 hover:bg-blue-400 my-6 py-2 px-3 rounded-sm">
+        <button type="submit" className="flex justify-center self-center text-sm bg-secondary-color duration-300 hover:bg-primary-color my-6 py-2 px-3 rounded-sm">
           Login
         </button>
       </form>
@@ -52,7 +52,7 @@ export default function LoginPage() {
       <GoogleButton text="Sign up" />
       <p className="mt-8">Don&apos;t have an account? 
         <Link href = "/signup">
-           <span className="text-blue-500 cursor-pointer duration-300 hover:text-primary-color"> Sign up</span>
+           <span className="bg-secondary-color cursor-pointer duration-300 hover:text-primary-color"> Sign up</span>
         </Link>
         
       </p>

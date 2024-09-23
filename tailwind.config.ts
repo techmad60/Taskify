@@ -17,6 +17,7 @@ const config: Config = {
         "desktop-testimonial": "url('/images/desktop-testimonial.svg')",
       },
       colors: {
+        "secondary-color": "#2CAAFF",
         "primary-color": "#81CAFB",
         "color-zero": "#D9D9D9",
         "color-one": "#2C3E50",
