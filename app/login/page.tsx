@@ -20,7 +20,7 @@ export default function LoginPage() {
   return (
     <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light text-sm text-color-one`}>
       <Darklogo />
-      <form className={`flex flex-col justify-center border border-color-one px-12 rounded-[10px] w-72`}>
+      <form className={`flex flex-col justify-center border border-color-one px-12 rounded-[10px] w-72 bg-color-zero`}>
         
         
         <label className="pt-6 pb-1">Email</label>

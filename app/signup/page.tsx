@@ -18,7 +18,7 @@ export default function SignupPage() {
  
 
   return (
-    <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light text-sm text-color-one`}>
+    <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light  bg-color-zero text-sm text-color-one`}>
       <Darklogo />
       <form className={`flex flex-col justify-center border border-color-one px-12 rounded-[10px] w-72`}>
         
