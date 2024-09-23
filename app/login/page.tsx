@@ -52,7 +52,7 @@ export default function LoginPage() {
       <GoogleButton text="Sign up" />
       <p className="mt-8">Don&apos;t have an account? 
         <Link href = "/signup">
-           <span className="text-blue-500 cursor-pointer"> Sign up</span>
+           <span className="text-blue-500 cursor-pointer duration-300 hover:text-primary-color"> Sign up</span>
         </Link>
         
       </p>
