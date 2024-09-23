@@ -66,7 +66,7 @@ export default function SignupPage() {
       <GoogleButton text="Sign up" />
       <p className="mt-8">Already have an account? 
         <Link href = "/login">
-           <span className="text-primary-color cursor-pointer"> Login</span>
+           <span className="text-blue-400 cursor-pointer"> Login</span>
         </Link>
         
       </p>
