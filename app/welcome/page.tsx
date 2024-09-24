@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 
 export default function WelcomePage () {
     return (
-        <div className=" flex flex-col items-center bg-color-two rounded-[10px] h-[552px] w-[552px] lg:w-[650px] justify-around">
+        <div className=" flex flex-col items-center bg-color-two rounded-[10px] h-[552px] w-[317px] lg:w-[650px] justify-around">
             <Logo 
                 src="/images/logo.svg" 
                 alt="logo" 
