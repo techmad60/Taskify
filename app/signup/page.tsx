@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the icons
-import Darklogo from "@/components/Darklogo";
+import Logo from "@/components/Logo";
 import HorizontalLine from "@/components/HorizontalLine";
 import GoogleButton from "@/components/GoogleButton";
 import { poppinsFont } from "@/fonts/fonts";
@@ -19,7 +19,12 @@ export default function SignupPage() {
 
   return (
     <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light  bg-color-zero text-sm text-color-one`}>
-      <Darklogo />
+      <Logo 
+        src="/images/dark-logo.svg" 
+        alt="dark-logo" 
+        logoText="Taskify" 
+        textColor="text-color-one" 
+       />
       <form className={`flex flex-col justify-center shadow-[0px_4px_4px_rgba(0,0,0,0.25)] px-12 rounded-[10px] w-72`}>
         
         <label className="pt-6 pb-1">Name</label>
@@ -58,9 +63,9 @@ export default function SignupPage() {
           
         </div>
 
-        <button type="submit" className="flex justify-center self-center text-sm bg-primary-color duration-300 hover:bg-secondary-color my-6 py-2 px-3 rounded-sm">
+        <Link href="/welcome" type="submit" className="flex justify-center self-center text-sm bg-primary-color duration-300 hover:bg-secondary-color my-6 py-2 px-3 rounded-sm">
           Sign up
-        </button>
+        </Link>
       </form>
       <HorizontalLine />
       <GoogleButton text="Sign up" />
