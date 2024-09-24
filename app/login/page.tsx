@@ -20,11 +20,11 @@ export default function LoginPage() {
   return (
     <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light text-sm text-color-one`}>
       <Darklogo />
-      <form className={`flex flex-col justify-center border border-color-one px-12 rounded-[10px] w-72 bg-color-zero`}>
+      <form className={`flex flex-col justify-center shadow-[0px_4px_4px_rgba(0,0,0,0.25)] px-12 rounded-[10px] w-72 bg-color-zero`}>
         
         
         <label className="pt-6 pb-1">Email</label>
-        <input type="email" name="email" required autoFocus className="border border-color-one rounded-[10px] p-2" />
+        <input type="email" name="email" required autoFocus className=" rounded-[10px] p-2" />
         
         {/* Password Field */}
         <label className="pt-6 pb-1">Password</label>
@@ -33,7 +33,7 @@ export default function LoginPage() {
             type={showPassword ? "text" : "password"} 
             name="password" 
             required 
-            className="border border-color-one rounded-[10px] p-2 w-full" 
+            className=" rounded-[10px] p-2 w-full" 
           />
           <button 
             type="button" 
@@ -44,7 +44,7 @@ export default function LoginPage() {
           </button>
         </div>
         
-        <button type="submit" className="flex justify-center self-center text-sm bg-secondary-color duration-300 hover:bg-primary-color my-6 py-2 px-3 rounded-sm">
+        <button type="submit" className="flex justify-center self-center text-sm bg-primary-color duration-300 hover:bg-secondary-color my-6 py-2 px-3 rounded-sm">
           Login
         </button>
       </form>
