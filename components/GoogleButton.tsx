@@ -6,7 +6,7 @@ interface GoogleButtonProps {
 
 const GoogleButton: React.FC<GoogleButtonProps> = ({ text }) => {
   return (
-    <div className="flex items-center cursor-pointer justify-center bg-color-one py-3 px-6 rounded-[10px] gap-3">
+    <div className="flex items-center cursor-pointer justify-center bg-color-one duration-300 hover:bg-color-two py-3 px-6 rounded-[10px] gap-3">
       <Image 
         src={"/images/google-logo.svg"} 
         alt="Google logo" 

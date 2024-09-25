@@ -6,6 +6,7 @@ import Logo from "@/components/Logo";
 import HorizontalLine from "@/components/HorizontalLine";
 import GoogleButton from "@/components/GoogleButton";
 import { poppinsFont } from "@/fonts/fonts";
+import FormButton from "@/components/FormButton";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -49,9 +50,7 @@ export default function LoginPage() {
           </button>
         </div>
         
-        <Link href="/welcome" type="submit" className="flex justify-center self-center text-sm bg-primary-color duration-300 hover:bg-secondary-color my-6 py-2 px-3 rounded-sm">
-          Login
-        </Link>
+        <FormButton ButtonText="Login"/>
       </form>
       <HorizontalLine />
       <GoogleButton text="Sign up" />

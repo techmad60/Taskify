@@ -2,6 +2,7 @@ import Image from "next/image";
 import { interFont, poppinsFont, stylex } from "../fonts/fonts";
 import Button from "./Button";
 import Carousel from "./Carousel";
+import Link from "next/link";
 
 export default function Main() {
     return (
@@ -18,9 +19,9 @@ export default function Main() {
           <div className="flex flex-col items-center lg:items-start lg:text-start">
             <h1 className={`font-bold text-[32px] text-primary-color sm:px-12 lg:px-0 lg:w-[431px]`}>Stay Organized, Achieve More with Taskify</h1>
             <p className={`${poppinsFont.className} text-sm text-slate-200 font-normal py-6 sm:px-12 lg:px-0 lg:w-[424px]`} >Taskify is your ultimate task management tool designed to help you stay on top of your to-do list. Effortlessly add, manage, and complete tasks with our intuitive interface. Sign up now to start boosting your productivity!</p>
-            <button className="bg-primary-color text-color-one py-2 px-2 rounded-sm text-lg font-bold lg:mt-4 ">
+            <Link href="/signup" className="bg-primary-color text-color-one py-2 px-2 rounded-sm text-lg font-bold lg:mt-4 ">
               Get started
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -39,7 +40,7 @@ export default function Main() {
             <div className="flex flex-col items-center text-center py-4">
               <h3 className="font-bold text-xl text-color-one">Easy task creation</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Quickly add tasks with our intuitive interface.</p>
-              <Button />
+              <Button href="/signup" />
             </div>
           </article>
 
@@ -56,7 +57,7 @@ export default function Main() {
             <div className="flex flex-col items-center text-center py-4">
               <h3 className="font-bold text-xl text-color-one">Efficient Task Management</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Manage tasks effortlessly with Taskify.</p>
-              <Button />
+              <Button href="/signup" />
             </div>
           </article>
           <article className="mt-8 flex flex-col items-center lg:flex-row">
@@ -72,7 +73,7 @@ export default function Main() {
             <div className="flex flex-col items-center text-center py-4">
               <h3 className="font-bold text-xl text-color-one">Secure Aunthentication</h3>
               <p className={`${poppinsFont.className} px-16 py-4 text-slate-700 text-sm`}> Keep your tasks safe and accessible.</p>
-              <Button />
+              <Button href="/signup" />
             </div>
           </article>
         </section>
@@ -91,7 +92,7 @@ export default function Main() {
             <div className="flex flex-col items-center text-center">
               <h2 className="font-bold text-2xl  text-color-one pt-12">Try Taskify Today!</h2>
               <p className={`${poppinsFont.className} text-slate-700 text-sm px-16 py-4`}> Taskify - Organize your life, achieve more.</p>
-              <Button />
+              <Button href="/signup" />
             </div>
         </section>
       </main>

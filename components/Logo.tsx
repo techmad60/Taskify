@@ -3,7 +3,7 @@ import { interFont } from "@/fonts/fonts";
 
 export default function Logo({ src = "", alt = "logo", logoText = "Taskify", textColor = "text-color-one" }) {
     return (
-        <div className="flex items-center mb-4">
+        <div className="flex items-center">
             <Image 
               className=""
               src={src} 

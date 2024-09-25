@@ -2,10 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the icons
+import { poppinsFont } from "@/fonts/fonts";
 import Logo from "@/components/Logo";
 import HorizontalLine from "@/components/HorizontalLine";
 import GoogleButton from "@/components/GoogleButton";
-import { poppinsFont } from "@/fonts/fonts";
+import FormButton from "@/components/FormButton";
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,9 +64,7 @@ export default function SignupPage() {
           
         </div>
 
-        <Link href="/welcome" type="submit" className="flex justify-center self-center text-sm bg-primary-color duration-300 hover:bg-secondary-color my-6 py-2 px-3 rounded-sm">
-          Sign up
-        </Link>
+       <FormButton ButtonText="Sign up"/>
       </form>
       <HorizontalLine />
       <GoogleButton text="Sign up" />
