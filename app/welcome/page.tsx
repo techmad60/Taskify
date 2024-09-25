@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { pixelify } from "@/fonts/fonts";
+import { pixelify, poppinsFont } from "@/fonts/fonts";
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 
@@ -20,13 +20,6 @@ export default function WelcomePage () {
                 height={152}
                 className=""
             />
-            {/* <Image
-                src={"/images/welcome-desktop.svg"}
-                alt="Welcome Image"
-                width={418}
-                height={304}
-                className="hidden lg:flex"
-            /> */}
             <div className={`${pixelify.className} flex flex-col justify-center items-center text-color-zero`}>
                 <h1 className="font-medium text-2xl">Welcome Techmad!</h1>
                 <p>Let&apos;s do great things!</p>

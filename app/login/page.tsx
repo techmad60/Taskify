@@ -23,7 +23,7 @@ export default function LoginPage() {
         src="/images/dark-logo.svg" 
         alt="dark-logo" 
         logoText="Taskify" 
-        textColor="text-color-one" 
+        textColor="text-color-two" 
        />
       <form className={`flex flex-col justify-center shadow-[0px_4px_4px_rgba(0,0,0,0.25)] px-12 rounded-[10px] w-72 bg-white`}>
         
