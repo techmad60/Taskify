@@ -59,7 +59,7 @@ export default function Navbar () {
         <button onClick={handleToggleNav} className="lg:hidden">
           <Image
             className="" 
-            src={"/images/close-bar.svg"}
+            src={"/images/cancel-task.svg"}
             alt="Close-Bar"
             width={30}
             height={30}/>
