@@ -25,11 +25,11 @@ export default function LoginPage() {
         logoText="Taskify" 
         textColor="text-color-one" 
        />
-      <form className={`flex flex-col justify-center shadow-[0px_4px_4px_rgba(0,0,0,0.25)] px-12 rounded-[10px] w-72 bg-color-zero`}>
+      <form className={`flex flex-col justify-center shadow-[0px_4px_4px_rgba(0,0,0,0.25)] px-12 rounded-[10px] w-72 bg-white`}>
         
         
         <label className="pt-6 pb-1">Email</label>
-        <input type="email" name="email" required autoFocus className=" rounded-[10px] p-2" />
+        <input type="email" name="email" required autoFocus className="rounded-[10px] border p-2" />
         
         {/* Password Field */}
         <label className="pt-6 pb-1">Password</label>
@@ -38,7 +38,7 @@ export default function LoginPage() {
             type={showPassword ? "text" : "password"} 
             name="password" 
             required 
-            className=" rounded-[10px] p-2 w-full" 
+            className="rounded-[10px] border p-2 w-full" 
           />
           <button 
             type="button" 

@@ -18,7 +18,7 @@ export default function SignupPage() {
  
 
   return (
-    <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light  bg-color-zero text-sm text-color-one`}>
+    <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light  bg-white text-sm text-color-one`}>
       <Logo 
         src="/images/dark-logo.svg" 
         alt="dark-logo" 
@@ -28,10 +28,10 @@ export default function SignupPage() {
       <form className={`flex flex-col justify-center shadow-[0px_4px_4px_rgba(0,0,0,0.25)] px-12 rounded-[10px] w-72`}>
         
         <label className="pt-6 pb-1">Name</label>
-        <input type="text" name="name" required autoFocus className=" rounded-[10px] py-2 px-4" />
+        <input type="text" name="name" required autoFocus className="rounded-[10px] border  py-2 px-4" />
         
         <label className="pt-6 pb-1">Email</label>
-        <input type="email" name="email" required className=" rounded-[10px] py-2 px-4" />
+        <input type="email" name="email" required className=" rounded-[10px] border py-2 px-4" />
         
         {/* Password Field */}
         <label className="pt-6 pb-1">Password</label>
@@ -40,7 +40,7 @@ export default function SignupPage() {
             type={showPassword ? "text" : "password"} 
             name="password" 
             required 
-            className=" rounded-[10px] py-2 px-4 w-full"
+            className=" rounded-[10px] border py-2 px-4 w-full"
           />
           <button 
             type="button" 
@@ -58,7 +58,7 @@ export default function SignupPage() {
             type="password"
             name="repeatpassword" 
             required 
-            className=" rounded-[10px] py-2 px-4 w-full"
+            className=" rounded-[10px] border py-2 px-4 w-full"
           />
           
         </div>
