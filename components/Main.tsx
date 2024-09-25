@@ -19,8 +19,8 @@ export default function Main() {
           <div className="flex flex-col items-center lg:items-start lg:text-start">
             <h1 className={`font-bold text-[32px] text-primary-color sm:px-12 lg:px-0 lg:w-[431px]`}>Stay Organized, Achieve More with Taskify</h1>
             <p className={`${poppinsFont.className} text-sm text-slate-200 font-normal py-6 sm:px-12 lg:px-0 lg:w-[424px]`} >Taskify is your ultimate task management tool designed to help you stay on top of your to-do list. Effortlessly add, manage, and complete tasks with our intuitive interface. Sign up now to start boosting your productivity!</p>
-            <Link href="/signup" className="bg-primary-color text-color-one py-2 px-2 rounded-sm text-lg font-semibold lg:mt-4 ">
-              Get started
+            <Link href="/signup" >
+              <button className="bg-primary-color text-color-one py-2 px-2 rounded-sm text-lg font-semibold lg:mt-4 outline outline-offset-2 outline-1 outline-primary-color">Get started</button>
             </Link>
           </div>
         </section>
