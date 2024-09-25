@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { pixelify, poppinsFont } from "@/fonts/fonts";
 import Logo from "@/components/Logo";
-import Button from "@/components/Button";
+import Link from "next/link";
 
 
 export default function WelcomePage () {
@@ -24,7 +24,14 @@ export default function WelcomePage () {
                 <h1 className="font-medium text-2xl">Welcome Techmad!</h1>
                 <p>Let&apos;s do great things!</p>
             </div>
-            <Button/>
+            <Link href="/mainpage" className="inline-flex items-center bg-primary-color duration-300 hover:bg-secondary-color text-color-two p-2 rounded-sm text-sm">
+                Let&apos;s Go
+                <Image 
+                src={"/images/arrow-right.svg"}
+                alt="arrow-icon"
+                width={20}
+                height={24}/>
+            </Link>
         </div>
     )
 }
