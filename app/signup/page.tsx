@@ -11,11 +11,13 @@ import FormButton from "@/components/FormButton";
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState({ email: "", password: "", repeatPassword: "" }); // State to store error messages for each field
   const [name, setName] = useState(""); // State for name input
   const [email, setEmail] = useState(""); // State for email input
   const [password, setPassword] = useState(""); // State for password input
   const [repeatPassword, setRepeatPassword] = useState(""); // State for repeat password
+  const [emailError, setEmailError] = useState(""); // State to store email errors
+  const [passwordError, setPasswordError] = useState(""); // State to store password errors
+  const [repeatPasswordError, setRepeatPasswordError] = useState(""); // State to store repeat password errors
   const router = useRouter(); // Initialize useRouter
 
   // Function to toggle password visibility
@@ -23,33 +25,46 @@ export default function SignupPage() {
     setShowPassword(!showPassword);
   };
 
-  // Email validation function
-  const validateEmail = (email: string): boolean => {
+  // Basic email and password validation functions
+  const validateEmail = (email:string) => {
     const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     return gmailPattern.test(email);
   };
 
-  // Password validation function
-  const validatePassword = (password: string): boolean => {
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/; // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
+  const validatePassword = (password:string) => {
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/; // At least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 symbol
     return passwordPattern.test(password);
   };
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent the default form submission
+    e.preventDefault(); // Prevent default form submission
+    let hasError = false;
 
-    // Validate email and password
+    // Reset error states
+    setEmailError("");
+    setPasswordError("");
+    setRepeatPasswordError("");
+
+    // Validate email
     if (!validateEmail(email)) {
-      setError({ ...error, email: "Invalid email format (must be @gmail.com)" });
-      return;
+      setEmailError("Please provide a valid Gmail address.");
+      hasError = true;
     }
+
+    // Validate password
     if (!validatePassword(password)) {
-      setError({ ...error, password: "Password must be at least 8 characters, 1 uppercase, 1 lowercase, and 1 number." });
-      return;
+      setPasswordError("Password must be at least 8 characters, with an uppercase, lowercase, a number, and a symbol.");
+      hasError = true;
     }
+
+    // Validate repeat password
     if (password !== repeatPassword) {
-      setError({ ...error, repeatPassword: "Passwords do not match" });
+      setRepeatPasswordError("Passwords do not match.");
+      hasError = true;
+    }
+
+    if (hasError) {
       return;
     }
 
@@ -64,53 +79,29 @@ export default function SignupPage() {
 
       if (!response.ok) {
         const data = await response.json();
-        setError({ ...error, email: data.message }); // Display error message from the server
+        setEmailError(data.message); // Display error message from the server (if any)
         return;
       }
 
       const data = await response.json();
-      console.log(data.message); // Handle successful signup (e.g., redirect)
+      console.log(data.message); // Handle successful signup
       router.push('/welcome'); // Redirect to the welcome page
     } catch (error) {
-      console.log('signup failed') // Handle network errors
-    }
-  };
-
-  // Real-time validation: Email, Password, and Repeat Password
-  const handleBlurEmail = () => {
-    if (!validateEmail(email)) {
-      setError({ ...error, email: "Invalid email format (must be @gmail.com)" });
-    } else {
-      setError({ ...error, email: "" });
-    }
-  };
-
-  const handleBlurPassword = () => {
-    if (!validatePassword(password)) {
-      setError({ ...error, password: "Password must be at least 8 characters, 1 uppercase, 1 lowercase, and 1 number." });
-    } else {
-      setError({ ...error, password: "" });
-    }
-  };
-
-  const handleBlurRepeatPassword = () => {
-    if (password !== repeatPassword) {
-      setError({ ...error, repeatPassword: "Passwords do not match" });
-    } else {
-      setError({ ...error, repeatPassword: "" });
+      setEmailError("Signup failed. Please try again.");
     }
   };
 
   return (
-    <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light  bg-white text-sm text-color-one`}>
+    <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light bg-white text-sm text-color-one`}>
       <Logo 
         src="/images/dark-logo.svg" 
         alt="dark-logo" 
         logoText="Taskify" 
         textColor="text-color-two" 
-       />
+      />
       <form onSubmit={handleSubmit} className={`flex flex-col justify-center shadow-[0px_4px_4px_rgba(0,0,0,0.25)] px-12 rounded-[10px] w-72`}>
         
+        {/* Name Field */}
         <label className="pt-6 pb-1">Name</label>
         <input 
           type="text" 
@@ -119,9 +110,10 @@ export default function SignupPage() {
           autoFocus 
           value={name} // Controlled input
           onChange={(e) => setName(e.target.value)} // Update state
-          className="rounded-[10px] border  py-2 px-4" 
+          className="rounded-[10px] border py-2 px-4" 
         />
         
+        {/* Email Field */}
         <label className="pt-6 pb-1">Email</label>
         <input 
           type="email" 
@@ -129,10 +121,9 @@ export default function SignupPage() {
           required 
           value={email} // Controlled input
           onChange={(e) => setEmail(e.target.value)} // Update state
-          onBlur={handleBlurEmail} // Trigger validation on blur
           className="rounded-[10px] border py-2 px-4" 
         />
-        {error.email && <p className="text-red-500 text-xs mt-2">{error.email}</p>} {/* Email error */}
+        {emailError && <p className="text-red-500 text-xs font-extralight mt-2">{emailError}</p>} {/* Display email error */}
         
         {/* Password Field */}
         <label className="pt-6 pb-1">Password</label>
@@ -143,7 +134,6 @@ export default function SignupPage() {
             required 
             value={password} // Controlled input
             onChange={(e) => setPassword(e.target.value)} // Update state
-            onBlur={handleBlurPassword} // Trigger validation on blur
             className="rounded-[10px] border py-2 px-4 w-full"
           />
           <button 
@@ -154,7 +144,7 @@ export default function SignupPage() {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
-        {error.password && <p className="text-red-500 text-xs mt-2">{error.password}</p>} {/* Password error */}
+        {passwordError && <p className="text-red-500 text-xs font-extralight mt-2">{passwordError}</p>} {/* Display password error */}
         
         {/* Repeat Password Field */}
         <label className="pt-6 pb-1">Repeat password</label>
@@ -165,11 +155,10 @@ export default function SignupPage() {
             required 
             value={repeatPassword} // Controlled input
             onChange={(e) => setRepeatPassword(e.target.value)} // Update state
-            onBlur={handleBlurRepeatPassword} // Trigger validation on blur
             className="rounded-[10px] border py-2 px-4 w-full"
           />
         </div>
-        {error.repeatPassword && <p className="text-red-500 text-xs mt-2">{error.repeatPassword}</p>} {/* Repeat password error */}
+        {repeatPasswordError && <p className="text-red-500 text-xs font-extralight mt-2">{repeatPasswordError}</p>} {/* Display repeat password error */}
 
         <FormButton ButtonText="Sign up" />
       </form>
