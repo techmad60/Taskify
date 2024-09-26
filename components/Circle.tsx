@@ -3,7 +3,7 @@ export default function Circle() {
         <div style={{
             height: '25px',
             width: '25px',
-            border: '2px solid black', // Black border
+            border: '1px solid black', // Black border
             borderRadius: '50%', // Makes the div a circle
             display: 'flex',
             justifyContent: 'center',
