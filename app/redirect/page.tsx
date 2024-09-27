@@ -20,7 +20,7 @@ export default function RedirectPage () {
                 className="mt-24"
             />
             <div className={`${pixelify.className} flex flex-col justify-center items-center text-color-zero text-center`}>
-                <h1 className="font-medium text-2xl">You're almost there!</h1>
+                <h1 className="font-medium text-2xl">You&apos;re almost there!</h1>
                 <p className="mt-4" >Check your email for a verification token!</p>
             </div>
         </div>
