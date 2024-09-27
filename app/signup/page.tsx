@@ -69,7 +69,7 @@ export default function SignupPage() {
     }
 
     try {
-      const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/signup`, {
+      const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/signup/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
