@@ -5,8 +5,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the icons
 import { useRouter } from 'next/navigation'; // Import useRouter for redirection
 import { poppinsFont } from "@/fonts/fonts";
 import Logo from "@/components/Logo";
-import HorizontalLine from "@/components/HorizontalLine";
-import GoogleButton from "@/components/GoogleButton";
+// import HorizontalLine from "@/components/HorizontalLine";
+// import GoogleButton from "@/components/GoogleButton";
 import FormButton from "@/components/FormButton";
 
 export default function SignupPage() {
@@ -85,7 +85,7 @@ export default function SignupPage() {
 
       const data = await response.json();
       console.log(data.message); // Handle successful signup
-      router.push('/redirect'); // Redirect to the redirect page
+      router.push(`/redirect`); // Redirect to the redirect page
     } catch (error) {
       setEmailError("Signup failed. Please try again.");
     }
@@ -162,8 +162,8 @@ export default function SignupPage() {
 
         <FormButton ButtonText="Sign up" />
       </form>
-      <HorizontalLine />
-      <GoogleButton text="Sign up" />
+      {/* <HorizontalLine />
+      <GoogleButton text="Sign up" /> */}
       <p className="mt-8">Already have an account? 
         <Link href="/login">
            <span className="text-secondary-color duration-300 hover:text-primary-color cursor-pointer"> Login</span>

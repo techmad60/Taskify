@@ -3,8 +3,8 @@
 // import Logo from "@/components/Logo";
 import Redirect from "@/components/Redirect";
 
-export default function RedirectPage () {
+export default function PasswordRedirectPage () {
     return (
-       <Redirect src="/images/redirect.svg" heading="You&apos;re almost there!" paragraph="Check your email for a verification token!"/>
+       <Redirect src="/images/reset.svg" heading="Forgot your password hehh?" paragraph="Check your email for a reset password token!"/>
     )
 }

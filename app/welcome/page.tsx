@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { pixelify} from "@/fonts/fonts";
 import Logo from "@/components/Logo";
-import Link from "next/link";
 import Button from "@/components/Button";
 
 
@@ -22,7 +21,7 @@ export default function WelcomePage () {
                 className=""
             />
             <div className={`${pixelify.className} flex flex-col justify-center items-center text-color-zero`}>
-                <h1 className="font-medium text-2xl">Welcome Techmad!</h1>
+                <h1 className="font-medium text-2xl">Welcome!</h1>
                 <p>Let&apos;s do great things!</p>
             </div>
             <Button href="/mainpage"/>
