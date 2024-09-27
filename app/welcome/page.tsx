@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { pixelify, poppinsFont } from "@/fonts/fonts";
+import { pixelify} from "@/fonts/fonts";
 import Logo from "@/components/Logo";
 import Link from "next/link";
 import Button from "@/components/Button";

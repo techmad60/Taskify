@@ -85,7 +85,7 @@ export default function SignupPage() {
 
       const data = await response.json();
       console.log(data.message); // Handle successful signup
-      router.push('/welcome'); // Redirect to the welcome page
+      router.push('/redirect'); // Redirect to the redirect page
     } catch (error) {
       setEmailError("Signup failed. Please try again.");
     }
