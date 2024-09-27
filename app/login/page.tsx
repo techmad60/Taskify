@@ -27,7 +27,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
+      const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
