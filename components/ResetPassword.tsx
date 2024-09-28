@@ -12,7 +12,7 @@ export default function ResetPassword() {
     const [newPassword, setNewPassword] = useState(''); // State to hold new password
     const [passwordError, setPasswordError] = useState(""); // State to store password errors
     const [confirmPassword, setConfirmPassword] = useState(''); // State to hold confirm password
-    const [error, setError] = useState(''); // State for error messages
+    const [confirmPasswordError, setconfirmPasswordError] = useState("");
     const searchParams = useSearchParams(); // Initialize router for navigation
     const token  = searchParams.get('token'); // Get token from URL
     const router = useRouter()
@@ -37,12 +37,15 @@ export default function ResetPassword() {
             setPasswordError("Password must be at least 8 characters, with an uppercase, lowercase, a number, and a symbol.");
             hasError = true;
         }
-
-        // Check if passwords match
-        if (newPassword !== confirmPassword || hasError) {
-            setError("Passwords do not match.");
-            return;
+        // Validate Confirm passwords 
+        if (newPassword !== confirmPassword ) {
+            setconfirmPasswordError("Passwords do not match.");
+            hasError = true;
         }
+
+        if (hasError) {
+            return;
+          }
 
         try {
             // Send request to reset password
@@ -63,9 +66,9 @@ export default function ResetPassword() {
             router.push('/login');
         } catch (err) {
             if (err instanceof Error) {
-                setError(err.message); // Set error message to be displayed
+                setconfirmPasswordError(err.message); // Set error message to be displayed
               } else {
-                setError("An unknown error occurred.");
+                setconfirmPasswordError("An unknown error occurred.");
               }
         }
     };
@@ -119,7 +122,7 @@ export default function ResetPassword() {
                     </button>
                 </div>
 
-                {error && <p className="text-red-500">{error}</p>} {/* Display error message */}
+                {confirmPasswordError && <p className="text-red-500 text-xs font-extralight mt-2">{confirmPasswordError}</p>}
 
                 <button 
                     type="submit" 
