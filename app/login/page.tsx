@@ -137,7 +137,7 @@ export default function LoginPage() {
           </button>
         </div>
        
-        <p className="mt-3 text-blue-400 cursor-pointer hover:text-primary-color" onClick={handleForgotPassword}>
+        <p className="mt-3 text-blue-400 cursor-pointer duration-300 hover:text-primary-color" onClick={handleForgotPassword}>
           Forgot Password?
         </p>
         {error && <p className="text-red-500 text-center mt-4">{error}</p>}

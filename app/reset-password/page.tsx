@@ -35,8 +35,10 @@ export default function ResetPassword() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token, newPassword }), // Include token and new password in request body
+               
             });
 
+            console.log(token)
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message || "Failed to reset password.");
