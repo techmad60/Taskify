@@ -1,15 +1,12 @@
 "use client";
-import React, {useState, Suspense} from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
+import { useState } from "react";
 import Logo from "@/components/Logo";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from 'next/navigation'; // Import useRouter to handle navigation
 import { poppinsFont } from "@/fonts/fonts";
 
-function Loading() {
-    return <div>Loading...</div>;
-}
-export default function ResetPassword() {
+export default function Navigation() {
     const [showPassword, setShowPassword] = useState(false);
     const [newPassword, setNewPassword] = useState(''); // State to hold new password
     const [confirmPassword, setConfirmPassword] = useState(''); // State to hold confirm password
@@ -116,12 +113,5 @@ export default function ResetPassword() {
                 </button>
             </form>
         </div>
-    );
-}
-export function App() {
-    return (
-        <Suspense fallback={<Loading />}>
-            <ResetPassword />
-        </Suspense>
     );
 }
