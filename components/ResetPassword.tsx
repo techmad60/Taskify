@@ -10,6 +10,7 @@ import { poppinsFont } from "@/fonts/fonts";
 export default function ResetPassword() {
     const [showPassword, setShowPassword] = useState(false);
     const [newPassword, setNewPassword] = useState(''); // State to hold new password
+    const [passwordError, setPasswordError] = useState(""); // State to store password errors
     const [confirmPassword, setConfirmPassword] = useState(''); // State to hold confirm password
     const [error, setError] = useState(''); // State for error messages
     const searchParams = useSearchParams(); // Initialize router for navigation
@@ -20,9 +21,22 @@ export default function ResetPassword() {
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    const validatePassword = (password:string) => {
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/; // At least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 symbol
+        return passwordPattern.test(password);
+    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); // Prevent default form submission
+        let hasError = false;
+
+        setPasswordError("");
+
+        // Validate password
+        if (!validatePassword(newPassword)) {
+            setPasswordError("Password must be at least 8 characters, with an uppercase, lowercase, a number, and a symbol.");
+            hasError = true;
+        }
 
         // Check if passwords match
         if (newPassword !== confirmPassword) {
@@ -84,6 +98,7 @@ export default function ResetPassword() {
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>
+                {passwordError && <p className="text-red-500 text-xs font-extralight mt-2">{passwordError}</p>}
 
                 <label className="pt-6 pb-1">Confirm Password</label>
                 <div className="relative">
