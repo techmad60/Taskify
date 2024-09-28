@@ -1,12 +1,13 @@
 "use client";
+import {useState} from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
-import { useState } from "react";
 import Logo from "@/components/Logo";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from 'next/navigation'; // Import useRouter to handle navigation
 import { poppinsFont } from "@/fonts/fonts";
 
-export default function Navigation() {
+
+export default function ResetPassword() {
     const [showPassword, setShowPassword] = useState(false);
     const [newPassword, setNewPassword] = useState(''); // State to hold new password
     const [confirmPassword, setConfirmPassword] = useState(''); // State to hold confirm password
