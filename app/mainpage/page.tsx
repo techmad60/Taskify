@@ -38,7 +38,7 @@ export default function MainPage() {
         }
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks`, {
+            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title: taskTitle }),
@@ -59,7 +59,7 @@ export default function MainPage() {
 
     const deleteTask = async (taskId: string) => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`, {
+            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks/${taskId}`, {
                 method: 'DELETE',
             });
 
@@ -88,7 +88,7 @@ export default function MainPage() {
         }
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/${taskToEdit._id}`, {
+            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks/${taskToEdit._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title: taskTitle }),
@@ -111,7 +111,7 @@ export default function MainPage() {
 
     useEffect(() => {
         const fetchTasks = async () => {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks`);
+            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`);
             const data = await response.json();
             setTasks(data);
         };
