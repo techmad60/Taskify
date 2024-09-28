@@ -39,7 +39,7 @@ export default function ResetPassword() {
         }
 
         // Check if passwords match
-        if (newPassword !== confirmPassword) {
+        if (newPassword !== confirmPassword || hasError) {
             setError("Passwords do not match.");
             return;
         }
