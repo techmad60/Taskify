@@ -1,5 +1,4 @@
-// components/Loading.tsx
-"use client";
+
 
 export default function Loading() {
   return (
