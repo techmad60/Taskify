@@ -125,9 +125,9 @@ export default function MainPage() {
                 <Logo src="/images/logo.svg" alt="logo" logoText="Taskify" textColor="text-white" />
             </div>
 
-            <div className="mt-4 flex flex-col items-center ">
+            <div className="mt-4 flex flex-col items-center">
                 {tasks.map((task) => (
-                    <div key={task._id} className="p-4 bg-color-zero rounded-[4px] shadow-md w-[82%] h-auto flex items-center justify-between mt-4">
+                    <div key={task._id} className="p-4 bg-color-zero rounded-[4px] shadow-md w-[82%] sm:w-[70%] h-auto flex items-center justify-between mt-4">
                         <div className="flex-shrink-0 cursor-pointer" onClick={() => toggleCheck(task._id)}>
                             {task.checked ? (
                                 <Image src={"/images/check-task.svg"} alt="Checked task" width={26} height={26} />
@@ -154,15 +154,14 @@ export default function MainPage() {
 
             {showOverlay && (
                 <div className="fixed z-30 inset-0 bg-black bg-opacity-50 flex justify-center min-h-screen items-center">
-                    <div className="bg-white p-4 rounded-lg flex flex-col h-[205px] justify-around overlay">
+                    <div className="bg-white p-4 rounded-lg flex flex-col h-[350px] w-[80%] sm:w-[50%] md:w-[40%] lg:w-[] justify-around overlay">
                         <button className="cursor-pointer flex justify-end" onClick={toggleOverlay}>
                             <Image src={"/images/cancel-task.svg"} alt="Cancel task Button" width={20} height={20} />
                         </button>
                         <textarea
                             placeholder="Add Task Title..." 
-                            className="text-center placeholder:text-xl font-semibold outline-none resize-none" 
-                            maxLength={30} 
-                            rows={3} 
+                            className="text-center placeholder:text-xl font-semibold" 
+                            maxLength={30}  
                             value={taskTitle}
                             onChange={(e) => setTaskTitle(e.target.value)}
                             onKeyDown={(e) => {
@@ -172,8 +171,40 @@ export default function MainPage() {
                                 }
                             }}
                         />
+                        <div className="flex items-center border-b gap-4 p-4">
+                            <button>
+                                <Image 
+                                src={"/images/calendar.svg"} 
+                                alt="Cancel task Button" 
+                                width={20} 
+                                height={20} />
+                            </button>
+                            
+                            <p className="text-[#555855] text-sm font-semibold">Set due dates</p>
+                        </div>
+                        <div className="flex items-center border-b gap-4 p-4">
+                            <button>
+                                <Image 
+                                src={"/images/priority.svg"} 
+                                alt="Cancel task Button" 
+                                width={20} 
+                                height={20} />
+                            </button>
+                            
+                            <p className="text-[#555855] text-sm font-semibold">Set priority</p>
+                        </div>
+                        <div className="flex items-center border-b gap-4 p-4">
+                            <button>
+                                <Image 
+                                src={"/images/status.svg"} 
+                                alt="Cancel task Button" 
+                                width={20} 
+                                height={20} />
+                            </button>
+                            <p className="text-[#555855] text-sm font-semibold">Set status</p>
+                        </div>
 
-                        <button onClick={isEditing ? updateTask : createTask} className="duration-200 hover:bg-color-one rounded-full flex self-center">
+                        <button onClick={isEditing ? updateTask : createTask} className="duration-200 hover:bg-color-one rounded-full flex self-center mt-2">
                             <Image
                                 src={isEditing ? "/images/edit-task.svg" : "/images/create-task.svg"} // Change icon depending on mode
                                 alt={isEditing ? "Edit task Button" : "Create task Button"}
@@ -181,7 +212,7 @@ export default function MainPage() {
                                 height={50}
                             />
                         </button>
-                        <p className="text-xs font-light text-center mt-2">
+                        <p className="text-xs font-light text-center mt-1">
                             {isEditing ? "Edit task" : "Create task"}
                         </p>
 

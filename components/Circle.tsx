@@ -3,12 +3,12 @@ export default function Circle() {
         <div style={{
             height: '25px',
             width: '25px',
-            border: '1px solid black', // Black border
+            border: '1px solid #2C3E50', // Black border
             borderRadius: '50%', // Makes the div a circle
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'white' // Optional: white background color
+            backgroundColor: '#D9D9D9' // Optional: white background color
         }}>
         </div>
     )
