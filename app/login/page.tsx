@@ -1,11 +1,12 @@
  "use client";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 import Logo from "@/components/Logo";
 import { useRouter } from 'next/navigation'; 
 import { poppinsFont } from "@/fonts/fonts";
 import FormButton from "@/components/FormButton";
+import Cookies from 'js-cookie'; // Add this import
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,6 +47,9 @@ export default function LoginPage() {
       if (!response.ok) {
         throw new Error(data.message || "Failed to send reset email");
       }
+
+      // Store JWT token in cookie
+    Cookies.set('token', data.token, { expires: 1, secure: true });
   
       // If successful, redirect to the confirmation page
       router.push("/password-redirect");
@@ -94,6 +98,13 @@ export default function LoginPage() {
       }
     }
   };
+  useEffect(() => {
+    const token = Cookies.get('token');
+    if (token) {
+      router.push('/welcome'); // Redirect if already logged in
+    }
+  }, [router]);
+  
 
   return (
     <div className={`${poppinsFont.className} flex flex-col justify-center items-center font-light text-sm text-color-one`}>
