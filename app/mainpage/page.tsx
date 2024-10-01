@@ -49,6 +49,12 @@ export default function MainPage() {
             return;
         }
 
+        // Check if startDate is after endDate
+        if (startDate && endDate && startDate > endDate) {
+            alert('Start date cannot be later than the end date.'); // Show an alert
+            return; // Prevent task creation if dates are invalid
+        }
+
         try {
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
                 method: 'POST',
@@ -70,6 +76,9 @@ export default function MainPage() {
                 setShowOverlay(false);
                 setStartDate(null); // Reset start date
                 setEndDate(null); // Reset end dat
+                setSelectedPriority('Medium');
+                setSelectedStatus('Not Started');
+
             } else {
                 console.error("Error creating task");
             }
@@ -102,6 +111,9 @@ export default function MainPage() {
         setShowOverlay(true); // Show the overlay for editing
         setStartDate(null); // Reset start date
         setEndDate(null); // Reset end date
+        setSelectedPriority('Medium');
+        setSelectedStatus('Not Started');
+
     };
 
     const updateTask = async () => {
@@ -109,7 +121,11 @@ export default function MainPage() {
             alert("Task title is required!");
             return;
         }
-
+        // Check if startDate is after endDate
+        if (startDate && endDate && startDate > endDate) {
+            alert('Start date cannot be later than the end date.'); // Show an alert
+            return; // Prevent task update if dates are invalid
+        }
         try {
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks/${taskToEdit._id}`, {
                 method: 'PUT',
@@ -256,7 +272,7 @@ export default function MainPage() {
                                 height={20} />
                             </button>
                             
-                            <p className="text-[#555855] text-xs font-semibold">{` ${selectedPriority}`}</p>
+                            <p onClick={() => setShowPriorityModal(true)} className="text-[#555855] text-xs font-semibold cursor-pointer">{` ${selectedPriority}`}</p>
                         </div>
                         <div className="flex items-center border-b gap-4 p-4">
                             <button id="set-status" onClick={() => setShowStatusModal(true)}>
@@ -266,7 +282,7 @@ export default function MainPage() {
                                 width={25} 
                                 height={25} />
                             </button>
-                            <p className="text-[#555855] text-xs font-semibold">{`${selectedStatus}`}</p>
+                            <p  onClick={() => setShowStatusModal(true)} className="text-[#555855] text-xs font-semibold cursor-pointer">{`${selectedStatus}`}</p>
                         </div>
 
                         <button onClick={isEditing ? updateTask : createTask} className="duration-200 hover:bg-color-one rounded-full flex self-center mt-2">
