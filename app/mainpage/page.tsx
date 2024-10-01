@@ -156,13 +156,15 @@ export default function MainPage() {
             console.error("Error updating task:", error);
         }
     };
-
+   
     useEffect(() => {
+        console.log('Fetching tasks...');
         const fetchTasks = async () => {
             const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks', {
                 method: 'GET',
                 credentials: 'include', // Include cookies in the request
             });
+            console.log('Response status:', response.status); 
     
             if (response.status === 401) {
                 // Redirect to login if not authorized
