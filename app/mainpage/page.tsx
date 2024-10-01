@@ -21,7 +21,8 @@ export default function MainPage() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isEditing, setIsEditing] = useState(false); // New state to track if editing
     const [taskToEdit, setTaskToEdit] = useState<Task | null>(null); // Store the task being edited
-    const [showDatePicker, setShowDatePicker] = useState(false); // Toggle date picker visibility
+    const [showStatusModal, setShowStatusModal] = useState(false); // State for the status modal
+    const [selectedStatus, setSelectedStatus] = useState('Not Started'); // Default status
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [showPriorityModal, setShowPriorityModal] = useState(false); // State for the priority modal
@@ -56,7 +57,8 @@ export default function MainPage() {
                     title: taskTitle,
                     startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
                     endDate: endDate ? endDate.toISOString() : undefined, // Store the full date with time
-                    priority: selectedPriority // Send selected priority
+                    priority: selectedPriority, // Send selected priority
+                    status: selectedStatus
 
                 }),
             });
@@ -116,7 +118,8 @@ export default function MainPage() {
                     title: taskTitle,
                     startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
                     endDate: endDate ? endDate.toISOString() : undefined ,// Store the full date with time
-                    priority: selectedPriority // Send selected priority
+                    priority: selectedPriority, // Send selected priority
+                    status: selectedStatus
                 }),
                
                
@@ -204,38 +207,43 @@ export default function MainPage() {
                        {/* Start Date Picker */}
                         <div className="flex items-center border-b gap-4 p-3 mt-4">
                             <div className="flex items-center gap-4 ">
-                                <button>
-                                    <Image src={"/images/calendar.svg"} alt="Start Date Button" width={20} height={20} />
+                                <button className="">
+                                    <Image src={"/images/calendar.svg"} alt="Start Date Button" width={25} height={25} />
                                 </button>
                                
-                                <p className="text-[#555855] text-xs font-semibold">Start Date</p>
+                                {/* <p className="text-[#555855] text-xs font-semibold">Start</p> */}
                             </div>
+                           
                             <DatePicker
                                 selected={startDate}
                                 onChange={(date) => setStartDate(date)}
                                 showTimeSelect
                                 dateFormat="Pp"
                                 placeholderText="Set Start Date"
-                                className="outline-none text-xs cursor-pointer"
+                                className="outline-none text-xs cursor-pointer text-[#555855] font-semibold"
                             />
+                           
+                            
                         </div>
                         
-                        <div className="flex items-center border-b gap-6 p-3">
+                        <div className="flex items-center border-b gap-4 p-3">
                             <div className="flex items-center gap-4">
                                 <button>
-                                    <Image src={"/images/calendar.svg"} alt="End Date Button" width={20} height={20} />
+                                    <Image src={"/images/calendar.svg"} alt="End Date Button" width={25} height={25} />
                                 </button>
-                                
-                                <p className="text-[#555855] text-xs font-semibold">End Date</p>
                             </div>
+
+                        
                             <DatePicker
                                 selected={endDate}
                                 onChange={(date) => setEndDate(date)}
                                 showTimeSelect
                                 dateFormat="Pp"
                                 placeholderText="Set End Date"
-                                className="outline-none text-xs cursor-pointer "
+                                className="outline-none text-xs cursor-pointer text-[#555855] font-semibold"
                             />
+                          
+                           
                         </div>
                         {/* End Date Picker */}
                         
@@ -248,17 +256,17 @@ export default function MainPage() {
                                 height={20} />
                             </button>
                             
-                            <p className="text-[#555855] text-xs font-semibold">Set priority</p>
+                            <p className="text-[#555855] text-xs font-semibold">{` ${selectedPriority}`}</p>
                         </div>
                         <div className="flex items-center border-b gap-4 p-4">
-                            <button id="set-status">
+                            <button id="set-status" onClick={() => setShowStatusModal(true)}>
                                 <Image 
                                 src={"/images/status.svg"} 
                                 alt="Status Button" 
-                                width={20} 
-                                height={20} />
+                                width={25} 
+                                height={25} />
                             </button>
-                            <p className="text-[#555855] text-xs font-semibold">Set status</p>
+                            <p className="text-[#555855] text-xs font-semibold">{`${selectedStatus}`}</p>
                         </div>
 
                         <button onClick={isEditing ? updateTask : createTask} className="duration-200 hover:bg-color-one rounded-full flex self-center mt-2">
@@ -300,6 +308,32 @@ export default function MainPage() {
                     </div>
                 </div>
             )}
+
+            {showStatusModal && (
+                <div className="fixed z-30 inset-0 flex justify-center items-center">
+                    <div className="bg-white p-4 shadow-md rounded-md flex flex-col w-[250px]">
+                        <button className="cursor-pointer flex justify-end" onClick={() => setShowStatusModal(false)}>
+                            <Image src={"/images/cancel-task.svg"} alt="Close" width={20} height={20} />
+                        </button>
+                        <h3 className="text-lg font-semibold text-center mb-4 text-color-two">Select Status</h3>
+                        <div className="flex flex-col items-center">
+                            {['Not Started', 'In Progress', 'Completed'].map((status) => (
+                                <button
+                                    key={status}
+                                    className="w-full text-left text-sm p-2 hover:bg-gray-200"
+                                    onClick={() => {
+                                        setSelectedStatus(status); // Set selected status
+                                        setShowStatusModal(false); // Close modal after selection
+                                    }}
+                                >
+                                    {status}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+
 
         </div>
     );
