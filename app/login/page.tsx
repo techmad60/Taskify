@@ -87,8 +87,8 @@ export default function LoginPage() {
       }
 
       // Store JWT token in cookie
-      Cookies.set('token', data.token, { expires: 1, secure: true });
-      
+      Cookies.set('token', data.token, { expires: 1, secure: false});
+
       router.push('/welcome'); 
     } catch (err) {
       if (err instanceof Error) {
@@ -98,12 +98,12 @@ export default function LoginPage() {
       }
     }
   };
-  useEffect(() => {
-    const token = Cookies.get('token');
-    if (token) {
-      router.push('/welcome'); // Redirect if already logged in
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   const token = Cookies.get('token');
+  //   if (token) {
+  //     router.push('/welcome'); // Redirect if already logged in
+  //   }
+  // }, [router]);
   
 
   return (
