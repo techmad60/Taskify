@@ -4,11 +4,15 @@ import Image from "next/image";
 import { interFont } from "@/fonts/fonts";
 import Logo from "@/components/Logo";
 import Circle from "@/components/Circle";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface Task {
     title: string;
     _id: string;
     checked: boolean;
+    startDate?: Date;
+    endDate?: Date;
 }
 
 export default function MainPage() {
@@ -17,6 +21,11 @@ export default function MainPage() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isEditing, setIsEditing] = useState(false); // New state to track if editing
     const [taskToEdit, setTaskToEdit] = useState<Task | null>(null); // Store the task being edited
+    const [dueDate, setDueDate] = useState<Date | null>(null); // Store selected due date
+    const [showDatePicker, setShowDatePicker] = useState(false); // Toggle date picker visibility
+    const [startDate, setStartDate] = useState<Date | null>(null);
+    const [endDate, setEndDate] = useState<Date | null>(null);
+
 
     const toggleOverlay = () => {
         setShowOverlay(!showOverlay);
@@ -41,7 +50,12 @@ export default function MainPage() {
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title: taskTitle }),
+                body: JSON.stringify({ 
+                    title: taskTitle,
+                    startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
+                    endDate: endDate ? endDate.toISOString() : undefined // Store the full date with time
+
+                }),
             });
 
             if (response.ok) {
@@ -49,6 +63,8 @@ export default function MainPage() {
                 setTasks([...tasks, newTask]);
                 setTaskTitle('');
                 setShowOverlay(false);
+                setStartDate(null); // Reset start date
+                setEndDate(null); // Reset end dat
             } else {
                 console.error("Error creating task");
             }
@@ -79,6 +95,8 @@ export default function MainPage() {
         setTaskTitle(task.title); // Pre-fill the title input with the task's current title
         setIsEditing(true); // Indicate that we are in edit mode
         setShowOverlay(true); // Show the overlay for editing
+        setStartDate(null); // Reset start date
+        setEndDate(null); // Reset end date
     };
 
     const updateTask = async () => {
@@ -91,7 +109,14 @@ export default function MainPage() {
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks/${taskToEdit._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title: taskTitle }),
+                body: JSON.stringify({ 
+                    title: taskTitle,
+                    startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
+                    endDate: endDate ? endDate.toISOString() : undefined // Store the full date with time
+                
+                }),
+               
+               
             });
 
             if (response.ok) {
@@ -154,13 +179,13 @@ export default function MainPage() {
 
             {showOverlay && (
                 <div className="fixed z-30 inset-0 bg-black bg-opacity-50 flex justify-center min-h-screen items-center">
-                    <div className="bg-white p-4 rounded-lg flex flex-col h-[350px] w-[80%] sm:w-[50%] md:w-[40%] lg:w-[] justify-around overlay">
+                    <div className="bg-white p-4 rounded-lg flex flex-col h-auto w-[80%] sm:w-[50%] md:w-[40%] lg:w-[35%] justify-around overlay">
                         <button className="cursor-pointer flex justify-end" onClick={toggleOverlay}>
                             <Image src={"/images/cancel-task.svg"} alt="Cancel task Button" width={20} height={20} />
                         </button>
                         <textarea
                             placeholder="Add Task Title..." 
-                            className="text-center placeholder:text-xl font-semibold" 
+                            className="text-center placeholder:text-xl font-semibold outline-none placeholder:text-[#555855]" 
                             maxLength={30}  
                             value={taskTitle}
                             onChange={(e) => setTaskTitle(e.target.value)}
@@ -171,33 +196,55 @@ export default function MainPage() {
                                 }
                             }}
                         />
-                        <div className="flex items-center border-b gap-4 p-4">
-                            <button>
-                                <Image 
-                                src={"/images/calendar.svg"} 
-                                alt="Cancel task Button" 
-                                width={20} 
-                                height={20} />
-                            </button>
-                            
-                            <p className="text-[#555855] text-sm font-semibold">Set due dates</p>
+                        <input placeholder="Add title description" className="text-xs text-center border-none outline-none placeholder:text-[#555855]"></input>
+                       {/* Start Date Picker */}
+                        <div className="flex items-center border-b gap-4 p-3 mt-4">
+                            <div className="flex items-center gap-4 ">
+                                <Image src={"/images/calendar.svg"} alt="Start Date Button" width={20} height={20} />
+                                <p className="text-[#555855] text-sm font-semibold">Start Date</p>
+                            </div>
+                            <DatePicker
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                showTimeSelect
+                                dateFormat="Pp"
+                                placeholderText="Set Start Date"
+                                className="outline-none text-sm cursor-pointer"
+                            />
                         </div>
+                        
+                        <div className="flex items-center border-b gap-4 p-3">
+                            <div className="flex items-center gap-4">
+                                <Image src={"/images/calendar.svg"} alt="End Date Button" width={20} height={20} />
+                                <p className="text-[#555855] text-sm font-semibold">End Date</p>
+                            </div>
+                            <DatePicker
+                                selected={endDate}
+                                onChange={(date) => setEndDate(date)}
+                                showTimeSelect
+                                dateFormat="Pp"
+                                placeholderText="Set End Date"
+                                className="outline-none text-sm cursor-pointer"
+                            />
+                        </div>
+                        {/* End Date Picker */}
+                        
                         <div className="flex items-center border-b gap-4 p-4">
-                            <button>
+                            <button >
                                 <Image 
                                 src={"/images/priority.svg"} 
-                                alt="Cancel task Button" 
-                                width={20} 
+                                alt="Priority Button" 
+                                width={20} id="set-priority"
                                 height={20} />
                             </button>
                             
                             <p className="text-[#555855] text-sm font-semibold">Set priority</p>
                         </div>
                         <div className="flex items-center border-b gap-4 p-4">
-                            <button>
+                            <button id="set-status">
                                 <Image 
                                 src={"/images/status.svg"} 
-                                alt="Cancel task Button" 
+                                alt="Status Button" 
                                 width={20} 
                                 height={20} />
                             </button>
