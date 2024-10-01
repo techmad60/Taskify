@@ -185,9 +185,10 @@ export default function MainPage() {
                         </button>
                         <textarea
                             placeholder="Add Task Title..." 
-                            className="text-center placeholder:text-xl font-semibold outline-none placeholder:text-[#555855]" 
+                            className="text-center placeholder:text-xl font-semibold outline-none placeholder:text-slate-400" 
                             maxLength={30}  
                             value={taskTitle}
+                            autoFocus
                             onChange={(e) => setTaskTitle(e.target.value)}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
@@ -196,12 +197,15 @@ export default function MainPage() {
                                 }
                             }}
                         />
-                        <input placeholder="Add title description" className="text-xs text-center border-none outline-none placeholder:text-[#555855]"></input>
+                        <input placeholder="Add title description..." className="text-xs text-center border-none outline-none placeholder:text-slate-500"></input>
                        {/* Start Date Picker */}
-                        <div className="flex items-center border-b gap-4 p-3 mt-4">
+                        <div className="flex items-center border-b gap-4 p-3 mt-4 justify-between">
                             <div className="flex items-center gap-4 ">
-                                <Image src={"/images/calendar.svg"} alt="Start Date Button" width={20} height={20} />
-                                <p className="text-[#555855] text-sm font-semibold">Start Date</p>
+                                <button>
+                                    <Image src={"/images/calendar.svg"} alt="Start Date Button" width={20} height={20} />
+                                </button>
+                               
+                                <p className="text-[#555855] text-xs font-semibold">Start Date</p>
                             </div>
                             <DatePicker
                                 selected={startDate}
@@ -209,14 +213,17 @@ export default function MainPage() {
                                 showTimeSelect
                                 dateFormat="Pp"
                                 placeholderText="Set Start Date"
-                                className="outline-none text-sm cursor-pointer"
+                                className="outline-none text-xs cursor-pointer"
                             />
                         </div>
                         
                         <div className="flex items-center border-b gap-4 p-3">
                             <div className="flex items-center gap-4">
-                                <Image src={"/images/calendar.svg"} alt="End Date Button" width={20} height={20} />
-                                <p className="text-[#555855] text-sm font-semibold">End Date</p>
+                                <button>
+                                    <Image src={"/images/calendar.svg"} alt="End Date Button" width={20} height={20} />
+                                </button>
+                                
+                                <p className="text-[#555855] text-xs font-semibold">End Date</p>
                             </div>
                             <DatePicker
                                 selected={endDate}
@@ -224,13 +231,13 @@ export default function MainPage() {
                                 showTimeSelect
                                 dateFormat="Pp"
                                 placeholderText="Set End Date"
-                                className="outline-none text-sm cursor-pointer"
+                                className="outline-none text-xs cursor-pointer text-center"
                             />
                         </div>
                         {/* End Date Picker */}
                         
                         <div className="flex items-center border-b gap-4 p-4">
-                            <button >
+                            <button>
                                 <Image 
                                 src={"/images/priority.svg"} 
                                 alt="Priority Button" 
@@ -238,7 +245,7 @@ export default function MainPage() {
                                 height={20} />
                             </button>
                             
-                            <p className="text-[#555855] text-sm font-semibold">Set priority</p>
+                            <p className="text-[#555855] text-xs font-semibold">Set priority</p>
                         </div>
                         <div className="flex items-center border-b gap-4 p-4">
                             <button id="set-status">
@@ -248,7 +255,7 @@ export default function MainPage() {
                                 width={20} 
                                 height={20} />
                             </button>
-                            <p className="text-[#555855] text-sm font-semibold">Set status</p>
+                            <p className="text-[#555855] text-xs font-semibold">Set status</p>
                         </div>
 
                         <button onClick={isEditing ? updateTask : createTask} className="duration-200 hover:bg-color-one rounded-full flex self-center mt-2">
