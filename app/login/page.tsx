@@ -48,9 +48,6 @@ export default function LoginPage() {
         throw new Error(data.message || "Failed to send reset email");
       }
 
-      // Store JWT token in cookie
-    Cookies.set('token', data.token, { expires: 1, secure: true });
-  
       // If successful, redirect to the confirmation page
       router.push("/password-redirect");
     } catch (err) {
@@ -89,6 +86,9 @@ export default function LoginPage() {
         throw new Error(data.message || "Login failed");
       }
 
+      // Store JWT token in cookie
+      Cookies.set('token', data.token, { expires: 1, secure: true });
+      
       router.push('/welcome'); 
     } catch (err) {
       if (err instanceof Error) {
