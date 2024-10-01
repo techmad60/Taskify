@@ -21,10 +21,12 @@ export default function MainPage() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isEditing, setIsEditing] = useState(false); // New state to track if editing
     const [taskToEdit, setTaskToEdit] = useState<Task | null>(null); // Store the task being edited
-    const [dueDate, setDueDate] = useState<Date | null>(null); // Store selected due date
     const [showDatePicker, setShowDatePicker] = useState(false); // Toggle date picker visibility
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
+    const [showPriorityModal, setShowPriorityModal] = useState(false); // State for the priority modal
+    const [selectedPriority, setSelectedPriority] = useState('Medium'); // Default priority
+ 
 
 
     const toggleOverlay = () => {
@@ -53,7 +55,8 @@ export default function MainPage() {
                 body: JSON.stringify({ 
                     title: taskTitle,
                     startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
-                    endDate: endDate ? endDate.toISOString() : undefined // Store the full date with time
+                    endDate: endDate ? endDate.toISOString() : undefined, // Store the full date with time
+                    priority: selectedPriority // Send selected priority
 
                 }),
             });
@@ -112,8 +115,8 @@ export default function MainPage() {
                 body: JSON.stringify({ 
                     title: taskTitle,
                     startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
-                    endDate: endDate ? endDate.toISOString() : undefined // Store the full date with time
-                
+                    endDate: endDate ? endDate.toISOString() : undefined ,// Store the full date with time
+                    priority: selectedPriority // Send selected priority
                 }),
                
                
@@ -199,7 +202,7 @@ export default function MainPage() {
                         />
                         <input placeholder="Add title description..." className="text-xs text-center border-none outline-none placeholder:text-slate-500"></input>
                        {/* Start Date Picker */}
-                        <div className="flex items-center border-b gap-4 p-3 mt-4 justify-between">
+                        <div className="flex items-center border-b gap-4 p-3 mt-4">
                             <div className="flex items-center gap-4 ">
                                 <button>
                                     <Image src={"/images/calendar.svg"} alt="Start Date Button" width={20} height={20} />
@@ -217,7 +220,7 @@ export default function MainPage() {
                             />
                         </div>
                         
-                        <div className="flex items-center border-b gap-4 p-3">
+                        <div className="flex items-center border-b gap-6 p-3">
                             <div className="flex items-center gap-4">
                                 <button>
                                     <Image src={"/images/calendar.svg"} alt="End Date Button" width={20} height={20} />
@@ -231,13 +234,13 @@ export default function MainPage() {
                                 showTimeSelect
                                 dateFormat="Pp"
                                 placeholderText="Set End Date"
-                                className="outline-none text-xs cursor-pointer text-center"
+                                className="outline-none text-xs cursor-pointer "
                             />
                         </div>
                         {/* End Date Picker */}
                         
                         <div className="flex items-center border-b gap-4 p-4">
-                            <button>
+                            <button onClick={() => setShowPriorityModal(true)}>
                                 <Image 
                                 src={"/images/priority.svg"} 
                                 alt="Priority Button" 
@@ -273,6 +276,31 @@ export default function MainPage() {
                     </div>
                 </div>
             )}
+            {showPriorityModal && (
+                <div className="fixed z-40 inset-0  flex justify-center items-center">
+                    <div className="bg-white p-4 shadow-md flex flex-col w-[250px] rounded-md">
+                        <button className="cursor-pointer flex justify-end" onClick={() => setShowPriorityModal(false)}>
+                            <Image src={"/images/cancel-task.svg"} alt="Close" width={20} height={20} />
+                        </button>
+                        <h3 className="text-lg font-semibold text-center mb-4 text-color-two">Select Priority</h3>
+                        <div className="flex flex-col items-center ">
+                            {['Low', 'Medium', 'High'].map((priority) => (
+                                <button
+                                    key={priority}
+                                    className="w-full text-left text-sm p-2 hover:bg-gray-200"
+                                    onClick={() => {
+                                        setSelectedPriority(priority); // Set selected priority
+                                        setShowPriorityModal(false); // Close modal after selection
+                                    }}
+                                >
+                                    {priority}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }
