@@ -6,6 +6,7 @@ import Logo from "@/components/Logo";
 import Circle from "@/components/Circle";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from "next/navigation";
 
 interface Task {
     title: string;
@@ -28,7 +29,7 @@ export default function MainPage() {
     const [showPriorityModal, setShowPriorityModal] = useState(false); // State for the priority modal
     const [selectedPriority, setSelectedPriority] = useState('Medium'); // Default priority
  
-
+    const router = useRouter()
 
     const toggleOverlay = () => {
         setShowOverlay(!showOverlay);
@@ -158,13 +159,22 @@ export default function MainPage() {
 
     useEffect(() => {
         const fetchTasks = async () => {
-            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`);
-            const data = await response.json();
-            setTasks(data);
+            const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks', {
+                method: 'GET',
+                credentials: 'include', // Include cookies in the request
+            });
+    
+            if (response.status === 401) {
+                // Redirect to login if not authorized
+                router.push('/login');
+            } else {
+                const data = await response.json();
+                setTasks(data);
+            }
         };
-
+    
         fetchTasks();
-    }, []);
+    }, [router]);
 
     return (
         <div className={`${interFont.className} flex flex-col`}>
