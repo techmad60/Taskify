@@ -159,26 +159,39 @@ export default function MainPage() {
    
     useEffect(() => {
         const fetchTasks = async () => {
-            const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+            const token = localStorage.getItem('token');
     
-            const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks', {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`, // Include token in the header
-                    'Content-Type': 'application/json',
-                },
-            });
+            try {
+                const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks', {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
     
-            if (response.status === 401) {
-                router.push('/login'); // Redirect to login if unauthorized
-            } else {
+                if (!response.ok) {
+                    const errorMessage = await response.text(); // Get the response as plain text
+                    console.error('Error fetching tasks:', errorMessage);
+                    return;
+                }
+    
                 const data = await response.json();
-                setTasks(data);
+                
+                // Ensure `data` is an array before calling `.map()`
+                if (Array.isArray(data)) {
+                    setTasks(data);  // Only set tasks if `data` is an array
+                } else {
+                    console.error('Data is not an array:', data);
+                }
+            } catch (error) {
+                console.error('Error in fetchTasks:', error);
             }
         };
     
         fetchTasks();
     }, [router]);
+    
     
 
     return (
