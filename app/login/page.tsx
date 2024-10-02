@@ -91,7 +91,7 @@ export default function LoginPage() {
       // Store token in localStorage or sessionStorage
       //localStorage.setItem('token', data.token);
       console.log()
-      Cookies.set('token', data.token, { expires: 1, secure: true });
+      //Cookies.set('token', data.token, { expires: 1, secure: true });
       router.push('/mainpage'); 
     } catch (err) {
       if (err instanceof Error) {
