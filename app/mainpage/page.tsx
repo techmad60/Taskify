@@ -158,17 +158,19 @@ export default function MainPage() {
     };
    
     useEffect(() => {
-        console.log('Fetching tasks...');
         const fetchTasks = async () => {
+            const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    
             const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks', {
                 method: 'GET',
-                credentials: 'include', // Include cookies in the request
+                headers: {
+                    Authorization: `Bearer ${token}`, // Include token in the header
+                    'Content-Type': 'application/json',
+                },
             });
-            console.log('Response status:', response.status); 
     
             if (response.status === 401) {
-                // Redirect to login if not authorized
-                router.push('/login');
+                router.push('/login'); // Redirect to login if unauthorized
             } else {
                 const data = await response.json();
                 setTasks(data);
@@ -177,6 +179,7 @@ export default function MainPage() {
     
         fetchTasks();
     }, [router]);
+    
 
     return (
         <div className={`${interFont.className} flex flex-col`}>

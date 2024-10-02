@@ -87,7 +87,9 @@ export default function LoginPage() {
       }
 
       // Store JWT token in cookie
-      Cookies.set('token', data.token, { expires: 1, secure: false});
+      // Store token in localStorage or sessionStorage
+      localStorage.setItem('token', data.token);
+      console.log()
 
       router.push('/welcome'); 
     } catch (err) {
