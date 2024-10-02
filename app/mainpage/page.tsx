@@ -15,6 +15,8 @@ interface Task {
     checked: boolean;
     startDate?: Date;
     endDate?: Date;
+    priority: string;
+    status: string;
 }
 
 export default function MainPage() {
@@ -39,11 +41,11 @@ export default function MainPage() {
         }
     };
 
-    const toggleCheck = (taskId: string) => {
-        setTasks(tasks.map(task =>
-            task._id === taskId ? { ...task, checked: !task.checked } : task
-        ));
-    };
+    // const toggleCheck = (taskId: string) => {
+    //     setTasks(tasks.map(task =>
+    //         task._id === taskId ? { ...task, checked: !task.checked } : task
+    //     ));
+    // };
 
     const createTask = async () => {
         if (!taskTitle ) {
@@ -115,6 +117,7 @@ export default function MainPage() {
         try {
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks/${taskId}`, {
                 method: 'DELETE',
+                credentials: 'include'
             });
 
             if (response.ok) {
@@ -133,27 +136,43 @@ export default function MainPage() {
         setTaskTitle(task.title); // Pre-fill the title input with the task's current title
         setIsEditing(true); // Indicate that we are in edit mode
         setShowOverlay(true); // Show the overlay for editing
-        setStartDate(null); // Reset start date
-        setEndDate(null); // Reset end date
-        setSelectedPriority('Medium');
-        setSelectedStatus('Not Started');
-
+        setStartDate(task.startDate ? new Date(task.startDate) : null); // Retain original start date or set to null
+        setEndDate(task.endDate ? new Date(task.endDate) : null); // Retain original end date or set to null
+        setSelectedPriority(task.priority || 'Medium'); // Retain original priority or default to 'Medium'
+        setSelectedStatus(task.status || 'Not Started'); // Retain original status or default to 'Not Started'
     };
+    
 
     const updateTask = async () => {
         if (!taskTitle || !taskToEdit) {
             alert("Task title is required!");
             return;
         }
-        // Check if startDate is after endDate
-        if (startDate && endDate && startDate > endDate) {
-            alert('Start date cannot be later than the end date.'); // Show an alert
-            return; // Prevent task update if dates are invalid
+        
+        if (!startDate || !endDate) {
+            alert('Start date and End date are both required');
+            return;
+        }
+        if (startDate && endDate) {
+            // Convert to Date objects
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+        
+            if (start.getTime() === end.getTime()) {
+                alert('Start date and End date cannot be equal');
+                return; // Prevent task creation if dates are equal
+            }
+        
+            if (start.getTime() > end.getTime()) {
+                alert('Start date cannot be later than the end date.');
+                return; // Prevent task creation if dates are invalid
+            }
         }
         try {
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks/${taskToEdit._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: "include",
                 body: JSON.stringify({ 
                     title: taskTitle,
                     startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
@@ -225,10 +244,12 @@ export default function MainPage() {
 
             <div className="mt-4 flex flex-col items-center">
                 {tasks.map((task) => (
-                    <div key={task._id} className="p-4 bg-color-zero rounded-[4px] shadow-md w-[82%] sm:w-[70%] h-auto flex items-center justify-between mt-4">
-                        <div className="flex-shrink-0 cursor-pointer" onClick={() => toggleCheck(task._id)}>
-                            {task.checked ? (
-                                <Image src={"/images/check-task.svg"} alt="Checked task" width={26} height={26} />
+                   <div key={task._id} className="p-4 bg-color-zero rounded-[4px] shadow-md w-[82%] sm:w-[70%] h-auto flex items-center justify-between mt-4">
+                        <div className="flex-shrink-0 cursor-pointer"  onClick={() => handleEditTaskClick(task)}>
+                            {task.status === 'Completed' ? (
+                                <Image src={"/images/check-task.svg"} alt="Completed task" width={26} height={26} />
+                            ) : task.status === 'In Progress' ? (
+                                <Image src={"/images/pending.svg"} alt="In Progress task" width={26} height={26} />
                             ) : (
                                 <Circle />
                             )}
@@ -239,7 +260,8 @@ export default function MainPage() {
                         <button className="cursor-pointer flex justify-end flex-shrink-0" onClick={() => deleteTask(task._id)}>
                             <Image src={"/images/cancel-task.svg"} alt="Cancel task Button" width={20} height={20} />
                         </button>
-                    </div>
+                   </div>
+               
                 ))}
             </div>
 
