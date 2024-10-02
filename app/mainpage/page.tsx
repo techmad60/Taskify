@@ -59,7 +59,7 @@ export default function MainPage() {
 
         try {
             //const token = localStorage.getItem('token'); // Retrieve token from cookies
-            const response = await fetch(`http://taskify-backend-nq1q.onrender.com/api/tasks`, {
+            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
