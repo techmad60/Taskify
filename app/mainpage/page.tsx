@@ -7,6 +7,7 @@ import Circle from "@/components/Circle";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
+//import Cookies from 'js-cookie'; 
 
 interface Task {
     title: string;
@@ -57,9 +58,13 @@ export default function MainPage() {
         }
 
         try {
+            const token = localStorage.getItem('token'); // Retrieve token from cookies
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
                 body: JSON.stringify({ 
                     title: taskTitle,
                     startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
@@ -159,13 +164,14 @@ export default function MainPage() {
    
     useEffect(() => {
         const fetchTasks = async () => {
-            const token = localStorage.getItem('token');
+            //const token = localStorage.getItem('token');
     
             try {
-                const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks', {
+                const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
                     method: 'GET',
+                    credentials: 'include',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        //Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     },
                 });
@@ -173,7 +179,9 @@ export default function MainPage() {
                 if (!response.ok) {
                     const errorMessage = await response.text(); // Get the response as plain text
                     console.error('Error fetching tasks:', errorMessage);
+                    //router.push('/login')
                     return;
+                    
                 }
     
                 const data = await response.json();

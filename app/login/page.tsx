@@ -78,6 +78,7 @@ export default function LoginPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include', 
       });
 
       const data = await response.json();
@@ -88,10 +89,10 @@ export default function LoginPage() {
 
       // Store JWT token in cookie
       // Store token in localStorage or sessionStorage
-      localStorage.setItem('token', data.token);
+      //localStorage.setItem('token', data.token);
       console.log()
-
-      router.push('/welcome'); 
+      Cookies.set('token', data.token, { expires: 1, secure: true });
+      router.push('/mainpage'); 
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
