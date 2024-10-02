@@ -46,11 +46,14 @@ export default function MainPage() {
     };
 
     const createTask = async () => {
-        if (!taskTitle) {
+        if (!taskTitle ) {
             alert("Task title is required!");
             return;
         }
-
+        
+        if (!startDate || !endDate) {
+            alert('Start date and End date are both required')
+        }
         // Check if startDate is after endDate
         if (startDate && endDate && startDate > endDate) {
             alert('Start date cannot be later than the end date.'); // Show an alert
@@ -72,7 +75,10 @@ export default function MainPage() {
                     status: selectedStatus
 
                 }),
+                
+
             });
+            
 
             if (response.ok) {
                 const newTask: Task = await response.json();
