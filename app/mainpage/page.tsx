@@ -52,7 +52,8 @@ export default function MainPage() {
         }
         
         if (!startDate || !endDate) {
-            alert('Start date and End date are both required')
+            alert('Start date and End date are both required');
+            return;
         }
         // Check if startDate is after endDate
         if (startDate && endDate && startDate > endDate) {
