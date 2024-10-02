@@ -55,15 +55,23 @@ export default function MainPage() {
             alert('Start date and End date are both required');
             return;
         }
-        // Check if startDate is after endDate
-        if (startDate && endDate && startDate > endDate) {
-            alert('Start date cannot be later than the end date.'); // Show an alert
-            if ( startDate === endDate) {
-                alert('Start date and End date cannot be equal')
+        if (startDate && endDate) {
+            // Convert to Date objects
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+        
+            if (start.getTime() === end.getTime()) {
+                alert('Start date and End date cannot be equal');
+                return; // Prevent task creation if dates are equal
             }
-            return; // Prevent task creation if dates are invalid
-            
+        
+            if (start.getTime() > end.getTime()) {
+                alert('Start date cannot be later than the end date.');
+                return; // Prevent task creation if dates are invalid
+            }
         }
+        
+        
 
         try {
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
