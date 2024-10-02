@@ -177,7 +177,7 @@ export default function MainPage() {
                 if (!response.ok) {
                     const errorMessage = await response.text(); // Get the response as plain text
                     console.error('Error fetching tasks:', errorMessage);
-                    router.push('/login')
+                    //router.push('/login')
                     return;
                     
                 }
@@ -196,7 +196,7 @@ export default function MainPage() {
         };
     
         fetchTasks();
-    }, [router]);
+    }, []);
     
     
 
