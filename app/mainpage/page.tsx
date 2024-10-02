@@ -58,14 +58,12 @@ export default function MainPage() {
         }
 
         try {
-            //const token = localStorage.getItem('token'); // Retrieve token from cookies
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
                 method: 'POST',
+                credentials: "include",
                 headers: { 
                     'Content-Type': 'application/json',
-                    //'Authorization': `Bearer ${token}`,
                 },
-                credentials: "include",
                 body: JSON.stringify({ 
                     title: taskTitle,
                     startDate: startDate ? startDate.toISOString() : undefined, // Store the full date with time
