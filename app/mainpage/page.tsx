@@ -58,7 +58,11 @@ export default function MainPage() {
         // Check if startDate is after endDate
         if (startDate && endDate && startDate > endDate) {
             alert('Start date cannot be later than the end date.'); // Show an alert
+            if ( startDate === endDate) {
+                alert('Start date and End date cannot be equal')
+            }
             return; // Prevent task creation if dates are invalid
+            
         }
 
         try {
