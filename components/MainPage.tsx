@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/LoadingSpinner"; 
 
+
 interface Task {
     title: string;
     _id: string;
@@ -32,6 +33,7 @@ export default function MainPage() {
     const [showPriorityModal, setShowPriorityModal] = useState(false); // State for the priority modal
     const [selectedPriority, setSelectedPriority] = useState('Medium'); // Default priority
     const [loading, setLoading] = useState(false);
+  
 
  
     const router = useRouter()
@@ -42,6 +44,7 @@ export default function MainPage() {
             setIsEditing(false); // Reset editing state when overlay is toggled off
         }
     };
+    
 
     const createTask = async () => {
 
@@ -217,30 +220,26 @@ export default function MainPage() {
             setLoading(false);
         }
     };
-    // const handleLogout = async () => {
-    //     try {
-    //         const response = await fetch('https://your-backend-domain.com/api/logout', {
-    //             method: 'POST',
-    //             credentials: 'include',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //         });
+
+    const handleGAClick = () => {
+        const scheduledTasks = tasks
+          .filter(task => task.startDate && task.endDate)  // Only include tasks with valid dates
+          .map(task => ({
+            _id: task._id,
+            title: task.title,
+            startDate: task.startDate instanceof Date ? task.startDate.toISOString() : null,
+            endDate: task.endDate instanceof Date ? task.endDate.toISOString() : null,
+            priority: task.priority,
+            status: task.status,
+          }));
+      
+        const tasksString = JSON.stringify(scheduledTasks);
+        
+        router.push(`/scheduled-page?tasks=${encodeURIComponent(tasksString)}`);
+    };
+      
+
     
-    //         console.log('Response Status:', response.status); // Log the status code
-    
-    //         if (response.ok) {
-    //             document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    //             router.push('/login');
-    //         } else {
-    //             console.error("Failed to logout:", await response.json()); // Log the error response
-    //         }
-    //     } catch (error) {
-    //         console.error("Error logging out:", error);
-    //     }
-    // };
-    
-   
     useEffect(() => {
         const fetchTasks = async () => {
             try {
@@ -282,9 +281,13 @@ export default function MainPage() {
         <div className={`${interFont.className} flex flex-col`}>
             <div className="flex items-center justify-between bg-color-two py-4 px-8 sm:px-24 md:px-28 lg:px-36 xl:px-52">
                 <Logo src="/images/logo.svg" alt="logo" logoText="Taskify" textColor="text-white" />
-                {/* <button className="p-1 rounded-sm text-sm text-white" onClick={() => handleLogout()}>
-                    Log out
-                </button> */}
+                <div className="relative inline-block group" onClick={handleGAClick}>
+                    <button className="bg-gray-200 text-color-two px-3 py-2 rounded-md outline outline-offset-2 outline-1 outline-gray-200 font-semibold">G.A</button>
+                    <span className="absolute z-30 mb-2 hidden group-hover:block bg-color-two text-white text-center text-xs rounded-md px-4 py-4 ">
+                        Implement Genetic Algorithm
+                    </span>
+                </div>
+
             </div>
 
             <div className="mt-4 flex flex-col items-center">
@@ -299,7 +302,7 @@ export default function MainPage() {
                                 <Circle />
                             )}
                         </div>
-                        <p className="text-sm ml-4 font-bold flex-grow break-words" onClick={() => handleEditTaskClick(task)}>
+                        <p className="text-sm ml-4 font-semibold flex-grow break-words" onClick={() => handleEditTaskClick(task)}>
                             {task.title}
                         </p>
                         <button className="cursor-pointer flex justify-end flex-shrink-0" onClick={() => deleteTask(task._id)}>
