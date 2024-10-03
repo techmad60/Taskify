@@ -54,7 +54,7 @@ export default function Navbar () {
         className="fixed top-0 left-0 w-[25vw]  min-h-screen bg-black opacity-50 z-50 lg:hidden"
         onClick={handleToggleNav} 
       />
-    )}
+      )}
       <div className={`bg-[#D9D9D9] absolute top-0 right-0 h-screen flex flex-col items-center p-4 sm:p-8 w-3/4 lg:w-auto lg:flex-row lg:static lg:h-auto lg:bg-transparent lg:p-0 ${isNavOpen ? 'fixed' : 'hidden lg:flex'} `}>
         <button onClick={handleToggleNav} className="lg:hidden">
           <Image

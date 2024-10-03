@@ -23,7 +23,6 @@ export default function LoginPage() {
   };
 
   const handleForgotPassword = async () => {
-    // Clear previous errors
     setError("");
   
     // Check if email field is empty
@@ -87,11 +86,6 @@ export default function LoginPage() {
         throw new Error(data.message || "Login failed");
       }
 
-      // Store JWT token in cookie
-      // Store token in localStorage or sessionStorage
-      //localStorage.setItem('token', data.token);
-      console.log()
-      //Cookies.set('token', data.token, { expires: 1, secure: true });
       router.push('/mainpage'); 
     } catch (err) {
       if (err instanceof Error) {
@@ -101,12 +95,6 @@ export default function LoginPage() {
       }
     }
   };
-  // useEffect(() => {
-  //   const token = Cookies.get('token');
-  //   if (token) {
-  //     router.push('/welcome'); // Redirect if already logged in
-  //   }
-  // }, [router]);
   
 
   return (
