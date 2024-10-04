@@ -78,10 +78,14 @@ export default function MainPage() {
             alert('End date cannot be in the past.');
             return; // Prevent task creation if end date is in the past
         }
-    
-        
-        
-
+            // Log the dates before sending to the server
+            console.log("Creating task with:", {
+            title: taskTitle,
+            startDate: startDate.toISOString(),
+            endDate: endDate.toISOString(),
+            priority: selectedPriority,
+            status: selectedStatus
+        });
         try {
             const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
                 method: 'POST',
@@ -104,6 +108,7 @@ export default function MainPage() {
 
             if (response.ok) {
                 const newTask: Task = await response.json();
+                console.log("Newly created task:", newTask);
                 setTasks([...tasks, newTask]);
                 setTaskTitle('');
                 setShowOverlay(false);
@@ -222,18 +227,26 @@ export default function MainPage() {
     };
 
     const handleGAClick = () => {
-        const scheduledTasks = tasks.map(task => ({
-            _id: task._id,
-            title: task.title,
-            startDate: task.startDate instanceof Date ? task.startDate.toISOString() : null,
-            endDate: task.endDate instanceof Date ? task.endDate.toISOString() : null,
-            priority: task.priority,
-            status: task.status,
-        }));
+        // Log the current state of tasks before mapping
+        console.log("Current tasks state before passing to scheduled page:", tasks);
+    
+        const scheduledTasks = tasks.map(task => {
+            console.log(`Processing task ID: ${task._id} - Start Date: ${task.startDate}, End Date: ${task.endDate}`); // Log each task
+            return {
+                _id: task._id,
+                title: task.title,
+                startDate: task.startDate ? (typeof task.startDate === 'string' ? new Date(task.startDate).toISOString() : task.startDate.toISOString()) : null,
+                endDate: task.endDate ? (typeof task.endDate === 'string' ? new Date(task.endDate).toISOString() : task.endDate.toISOString()) : null,
+                priority: task.priority,
+                status: task.status,
+            };
+        });
     
         const tasksString = JSON.stringify(scheduledTasks);
+        console.log("Scheduled tasks string for URL:", tasksString);
         router.push(`/scheduled-page?tasks=${encodeURIComponent(tasksString)}`);
     };
+    
     
     
 
