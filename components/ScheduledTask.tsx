@@ -65,7 +65,7 @@ export default function ScheduledTasksPage() {
     
                 // Now, call the backend API to run the genetic algorithm
                 try {
-                    const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks/schedule-tasks', {
+                    const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks/schedule', {
                         method: 'POST', // Use POST to send the parsed tasks
                         headers: {
                             'Content-Type': 'application/json', // Set content type
