@@ -227,24 +227,7 @@ export default function MainPage() {
     };
 
     const handleGAClick = () => {
-        // Log the current state of tasks before mapping
-        console.log("Current tasks state before passing to scheduled page:", tasks);
-    
-        const scheduledTasks = tasks.map(task => {
-            console.log(`Processing task ID: ${task._id} - Start Date: ${task.startDate}, End Date: ${task.endDate}`); // Log each task
-            return {
-                _id: task._id,
-                title: task.title,
-                startDate: task.startDate ? (typeof task.startDate === 'string' ? new Date(task.startDate).toISOString() : task.startDate.toISOString()) : null,
-                endDate: task.endDate ? (typeof task.endDate === 'string' ? new Date(task.endDate).toISOString() : task.endDate.toISOString()) : null,
-                priority: task.priority,
-                status: task.status,
-            };
-        });
-    
-        const tasksString = JSON.stringify(scheduledTasks);
-        console.log("Scheduled tasks string for URL:", tasksString);
-        router.push(`/scheduled-page?tasks=${encodeURIComponent(tasksString)}`);
+        router.push(`/scheduled-page`);
     };
     
     

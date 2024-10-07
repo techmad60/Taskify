@@ -26,7 +26,7 @@ export default function Main() {
         </section>
 
         <section className="bg-hero-vector bg-no-repeat flex flex-col items-center p-4 features sm:p-8 lg:bg-desktop-hero lg:px-16">
-        <h2 className="font-bold text-2xl mt-24 text-color-one sm:mt-28">Why Choose Taskify</h2>
+          <h2 className="font-bold text-2xl mt-24 text-color-one sm:mt-28">Why Choose Taskify</h2>
           <article className="mt-8 flex flex-col items-center lg:flex-row">
             <div>
               <Image 
