@@ -33,23 +33,47 @@ export default function MainPage() {
     const [showPriorityModal, setShowPriorityModal] = useState(false); // State for the priority modal
     const [selectedPriority, setSelectedPriority] = useState('Medium'); // Default priority
     const [loading, setLoading] = useState(false);
-  
-
- 
     const router = useRouter()
 
-    const toggleOverlay = () => {
-        setShowOverlay(!showOverlay);
-        if (!showOverlay) {
-            setIsEditing(false); // Reset editing state when overlay is toggled off
-        }
-    };
+   
     
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+    
+                if (!response.ok) {
+                    const errorMessage = await response.text(); // Get the response as plain text
+                    console.error('Error fetching tasks:', errorMessage);
+                    router.push('/login')
+                    return;
+                    
+                }
+    
+                const data = await response.json();
+                
+                // Ensure `data` is an array before calling `.map()`
+                if (Array.isArray(data)) {
+                    setTasks(data);  // Only set tasks if `data` is an array
+                } else {
+                    console.error('Data is not an array:', data);
+                }
+            } catch (error) {
+                console.error('Error in fetchTasks:', error);
+            }
+        };
+    
+        fetchTasks();
+    }, [router]);
 
     const createTask = async () => {
-
         setLoading(true);
-
         if (!taskTitle ) {
             alert("Task title is required!");
             return;
@@ -229,48 +253,14 @@ export default function MainPage() {
     const handleGAClick = () => {
         router.push(`/scheduled-page`);
     };
-    
-    
-    
 
+    const toggleOverlay = () => {
+        setShowOverlay(!showOverlay);
+        if (!showOverlay) {
+            setIsEditing(false); // Reset editing state when overlay is toggled off
+        }
+    };
     
-    useEffect(() => {
-        const fetchTasks = async () => {
-            try {
-                const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-    
-                if (!response.ok) {
-                    const errorMessage = await response.text(); // Get the response as plain text
-                    console.error('Error fetching tasks:', errorMessage);
-                    router.push('/login')
-                    return;
-                    
-                }
-    
-                const data = await response.json();
-                
-                // Ensure `data` is an array before calling `.map()`
-                if (Array.isArray(data)) {
-                    setTasks(data);  // Only set tasks if `data` is an array
-                } else {
-                    console.error('Data is not an array:', data);
-                }
-            } catch (error) {
-                console.error('Error in fetchTasks:', error);
-            }
-        };
-    
-        fetchTasks();
-    }, [router]);
-    
-    
-
     return (
         <div className={`${interFont.className} flex flex-col`}>
             <div className="flex items-center justify-between bg-color-two py-4 px-8 sm:px-24 md:px-28 lg:px-36 xl:px-52">
@@ -472,4 +462,3 @@ export default function MainPage() {
         </div>
     );
 }
-
