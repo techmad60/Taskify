@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { interFont } from "@/fonts/fonts";
-import Logo from "@/components/Logo";
 import Circle from "@/components/Circle";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -281,10 +280,6 @@ export default function MainPage() {
         }
     };
 
-    const handleGAClick = () => {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        router.push(`/scheduled-page`);
-    };
 
     const toggleOverlay = () => {
         setShowOverlay(!showOverlay);

@@ -11,7 +11,7 @@ export default function Logo({ src = "", alt = "logo", logoText = "Taskify", tex
               width={20}
               height={20}
             />
-            <p className={`${interFont.className} text-sm font-light ${textColor}`}>
+            <p className={` ${interFont.className} ${textColor}`}>
               {logoText}
             </p>
         </div>

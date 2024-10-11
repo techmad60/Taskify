@@ -1,10 +1,11 @@
 'use client'
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { interFont } from "@/fonts/fonts";
 import { usePathname } from 'next/navigation';
 import {FaTimes, FaEye, FaBell, FaSignOutAlt, FaMagic } from 'react-icons/fa';
+import Logo from './Logo';
 
 export default function NavbarTasks () {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function NavbarTasks () {
   const handleToggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
-  const container = useRef(null);
+
   // Function to determine if a link is active
   const isActiveLink = (href: string) => pathname === href;
   
@@ -41,18 +42,9 @@ export default function NavbarTasks () {
 
 
   return (
-    <nav className={`${interFont.className} lg:flex justify-between lg:self-center items-center`} ref={container} >
+    <nav className={`${interFont.className} lg:flex justify-between lg:self-center items-center`} >
       <div className="flex justify-between items-center">
-        <div className="flex items-center">
-          <Image 
-          className=""
-          src={"/images/logo.svg"}
-          alt="Taskify-logo"
-          width={24}
-          height={24}/>
-          <p className={`${interFont.className} text-white text-sm`}>Taskify</p>
-        </div>
-        
+        <Logo src='/images/logo.svg' logoText='Taskify' textColor='text-white'/>
         <div className="cursor-pointer lg:hidden" onClick={handleToggleNav}>
             <Image 
             src={"/images/bars.svg"}
@@ -75,7 +67,6 @@ export default function NavbarTasks () {
         <div className="flex flex-col text-center leading-[60px] my-12 text-xl lg:flex-row lg:text-sm lg:text-h2-color">
           <div className='flex flex-col justify-between items-center flex-grow space-y-10 lg:space-y-0 lg:flex-row lg:space-x-24'>
             <Link href="/mainpage" className={`${isActiveLink('/mainpage') ? 'text-[#786F21] border-b border-[#786F21]' : ''} hover:text-[#786F21] transition duration-150 hover:ease-in nav-title flex items-center gap-2 text-white`}>
-              <p><FaMagic/></p>
               <p>Main Page</p>
             </Link>
 
@@ -84,7 +75,7 @@ export default function NavbarTasks () {
               <p>Magic Button</p>
             </Link>
 
-            <Link href="/taskdetails-page" className={`${isActiveLink('/task-details') ? 'text-[#786F21] border-b border-[#786F21]' : ''} hover:text-[#786F21] transition duration-150 hover:ease-in nav-title flex items-center gap-2 text-white`}>
+            <Link href="/taskdetails" className={`${isActiveLink('/taskdetails') ? 'text-[#786F21] border-b border-[#786F21]' : ''} hover:text-[#786F21] transition duration-150 hover:ease-in nav-title flex items-center gap-2 text-white`}>
               <p><FaEye/></p>
               <p>Tasks Details</p>
             </Link>
