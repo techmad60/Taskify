@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import HeaderTasks from "./HeaderTasks";
+import { useRouter } from "next/navigation";
 
 interface FinalTask {
     _id: string;
@@ -19,6 +20,7 @@ export default function ScheduledTasksPage() {
     const [optimizedTasks, setOptimizedTasks] = useState<FinalTask[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const router = useRouter()
 
     useEffect(() => {
         const fetchOptimizedTasks = async () => {
@@ -32,8 +34,10 @@ export default function ScheduledTasksPage() {
                 });
 
                 if (!response.ok) {
-                    throw new Error('Failed to fetch optimized tasks');
-
+                    const errorMessage = await response.text();
+                    console.error('Error fetching tasks:', errorMessage);
+                    router.push('/login');
+                    return;
                 }
 
                 const data = await response.json();
@@ -70,13 +74,13 @@ export default function ScheduledTasksPage() {
         };
 
         fetchOptimizedTasks();
-    }, []);
+    }, [router]);
 
     return (
         <div>
             <HeaderTasks />
-            <div className="p-8 bg-color-zero flex flex-col items-center mt-12">
-                <h1 className="text-2xl font-bold text-color-two text-center">Scheduled Tasks</h1>
+            <div className="p-8 bg-color-zero flex flex-col items-center mt-8">
+                <h1 className="text-2xl font-bold text-color-one text-center">Automatically Scheduled Tasks</h1>
                 {loading && <p>Loading tasks...</p>}
                 {error && <p className="text-red-500">{error}</p>}
                 <div className="mt-12 flex flex-col gap-6 lg:grid grid-cols-4">
@@ -87,11 +91,11 @@ export default function ScheduledTasksPage() {
                             <div key={task._id} className={`p-4 bg-gray-200 rounded-md shadow-md my-2 w-[15rem] h-auto text-center flex flex-col gap-3 py-6`}>
                                 <p className="bg-color-two font-semibold text-white flex self-center rounded-full w-[2rem] h-[2rem] justify-center items-center">{index + 1}</p>
                                 <h2 className="text-lg text-center font-semibold px-12 text-color-two">{task.title}</h2>
-                                <p>Priority: {task.priority}</p>
                                 <p>Status: {task.status}</p>
+                                {/* <p>Priority: {task.priority}</p>
                                 <p>{`Start Date: ${task.startDate ? task.startDate.toLocaleDateString() : 'N/A'}`}</p>
                                 <p>{`End Date: ${task.endDate ? task.endDate.toLocaleDateString() : 'N/A'}`}</p>
-                                <p>{`Duration: ${(task.estimatedDuration)}`} hours</p>
+                                <p>{`Duration: ${(task.estimatedDuration)}`} hours</p> */}
                             </div>
                             
                         ))

@@ -360,8 +360,6 @@ export default function MainPage() {
                                 placeholderText="Set Start Date"
                                 className="outline-none text-xs cursor-pointer text-[#555855] font-semibold"
                             />
-                           
-                            
                         </div>
                         
                         <div className="flex items-center border-b gap-4 p-3">
@@ -381,8 +379,6 @@ export default function MainPage() {
                                 className="outline-none text-xs cursor-pointer text-[#555855] font-semibold"
                                 minDate={new Date()}
                             />
-                          
-                           
                         </div>
                         {/* End Date Picker */}
                         
