@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/LoadingSpinner"; 
+import HeaderTasks from "./HeaderTasks";
 
 
 interface Task {
@@ -294,17 +295,7 @@ export default function MainPage() {
     
     return (
         <div className={`${interFont.className} flex flex-col`}>
-            <div className="flex items-center justify-between bg-color-two py-4 px-8 sm:px-24 md:px-28 lg:px-36 xl:px-52">
-                <Logo src="/images/logo.svg" alt="logo" logoText="Taskify" textColor="text-white" />
-                <div className="relative inline-block group" onClick={handleGAClick}>
-                    <button className="bg-gray-200 text-color-two px-3 py-2 rounded-md outline outline-offset-2 outline-1 outline-gray-200 font-semibold">G.A</button>
-                    <span className="absolute z-30 mb-2 hidden group-hover:block bg-color-two text-white text-center text-xs rounded-md px-4 py-4 ">
-                        Implement Genetic Algorithm
-                    </span>
-                </div>
-
-            </div>
-
+           <HeaderTasks/>
             <div className="mt-4 flex flex-col items-center">
                 {tasks.map((task) => (
                    <div key={task._id} className="p-4 bg-gray-200 rounded-[4px] shadow-md w-[82%] sm:w-[70%] h-auto flex items-center justify-between mt-4">
