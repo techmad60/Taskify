@@ -1,21 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface FinalTask {
     _id: string;
     title: string;
-    startDate: Date | null; // Use Date type
-    endDate: Date | null;   // Use Date type
+    startDate: Date | null;
+    endDate: Date | null;
     priority: string;
     status: string;
-    user: string; // Adjust as needed
-    estimatedDuration: number;
-    __v: number;
+    // user: string;
+    // estimatedDuration: number;
+    // __v: number;
 }
 
 export default function ScheduledTasksPage() {
     const [optimizedTasks, setOptimizedTasks] = useState<FinalTask[]>([]);
-    const [error, setError] = useState<string | null>(null); // Allow error to be a string or null
+    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -24,51 +25,48 @@ export default function ScheduledTasksPage() {
             setError(null);
 
             try {
-                // Fetch optimized tasks from the API
-                const response = await fetch('https://taskify-backend-nq1q.onrender.com/api/tasks/schedule', {
-                    method: 'GET', // Use GET to retrieve optimized tasks
-                    credentials: 'include', // Include credentials for session management
+                const response = await fetch('http://localhost:5000/api/tasks/schedule', {
+                    method: 'GET',
+                    credentials: 'include',
                 });
 
                 if (!response.ok) {
-                    throw new Error('Failed to fetch optimized tasks'); // Throw error if response is not ok
+                    throw new Error('Failed to fetch optimized tasks');
                 }
 
-                const data = await response.json(); // Parse the JSON response
-                const { scheduledTasks } = data; // Destructure the response
-                
+                const data = await response.json();
+                const { scheduledTasks } = data;
 
-                // Convert the tasks to FinalTask format
+                console.log("Scheduled tasks fetched:", scheduledTasks);
+
                 const fetchedTasks: FinalTask[] = scheduledTasks.map((task: any) => {
-                    const startDate = task.startDate ? new Date(task.startDate) : null; // Parse directly from string
-                    const endDate = task.endDate ? new Date(task.endDate) : null; // Parse directly from string
+                    const startDate = task.startDate ? new Date(task.startDate) : null;
+                    const endDate = task.endDate ? new Date(task.endDate) : null;
 
                     return {
                         _id: task._id,
-                        title: task.title,
+                        title: task.title || 'Untitled Task', // Fallback if title is missing
                         startDate: startDate,
                         endDate: endDate,
-                        priority: task.priority,
-                        status: task.status,
-                        user: task.user,
-                        estimatedDuration: task.estimatedDuration,
-                        __v: task.__v,
+                        priority: task.priority || 'Medium', // Default priority if missing
+                        status: task.status || 'Not Started', // Default status if missing
+                        user: task.user || 'Unknown',
+                        estimatedDuration: task.estimatedDuration || 0,
+                        __v: task.__v || 0,
                     };
                 });
 
-                setOptimizedTasks(fetchedTasks); // Set the optimized tasks in state
-                console.log("Fetched optimized tasks from API:", fetchedTasks);
-
+                setOptimizedTasks(fetchedTasks);
             } catch (error) {
                 console.error("Error fetching optimized tasks:", error);
-                setError("Failed to fetch optimized tasks."); // Handle error
+                setError("Failed to fetch optimized tasks.");
             } finally {
-                setLoading(false); // Reset loading state
+                setLoading(false);
             }
         };
 
-        fetchOptimizedTasks(); // Call the function when the component mounts
-    }, []); // No dependencies, this runs once when the component mounts
+        fetchOptimizedTasks();
+    }, []);
 
     return (
         <div className="p-8">
@@ -90,8 +88,8 @@ export default function ScheduledTasksPage() {
                     ))
                 )}
             </div>
+            <Link href="/mainpage"><button>Return</button></Link>
         </div>
     );
+    
 }
-
-

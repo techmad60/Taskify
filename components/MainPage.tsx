@@ -40,7 +40,7 @@ export default function MainPage() {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
+                const response = await fetch(`http://localhost:5000/api/tasks`, {
                     method: 'GET',
                     credentials: 'include',
                     headers: {
@@ -49,38 +49,45 @@ export default function MainPage() {
                 });
     
                 if (!response.ok) {
-                    const errorMessage = await response.text(); // Get the response as plain text
+                    const errorMessage = await response.text();
                     console.error('Error fetching tasks:', errorMessage);
-                    router.push('/login')
+                    router.push('/login');
                     return;
-                    
                 }
     
                 const data = await response.json();
-                
-                // Ensure `data` is an array before calling `.map()`
-                if (Array.isArray(data)) {
-                    setTasks(data);  // Only set tasks if `data` is an array
-                } else {
-                    console.error('Data is not an array:', data);
-                }
+    
+                // Save tasks to local storage
+                localStorage.setItem('tasks', JSON.stringify(data));
+    
+                // Set tasks in state
+                setTasks(data);
             } catch (error) {
                 console.error('Error in fetchTasks:', error);
             }
         };
     
-        fetchTasks();
+        // Check local storage first
+        const storedTasks = localStorage.getItem('tasks');
+        if (storedTasks) {
+            setTasks(JSON.parse(storedTasks)); // Load tasks from local storage
+        } else {
+            fetchTasks(); // If no tasks in local storage, fetch from the database
+        }
     }, [router]);
-
+    
     const createTask = async () => {
         setLoading(true);
         if (!taskTitle ) {
             alert("Task title is required!");
+            setLoading(false)
             return;
+            
         }
         
         if (!startDate || !endDate) {
             alert('Start date and End date are both required');
+            setLoading(false)
             return;
         }
         if (startDate && endDate) {
@@ -90,16 +97,19 @@ export default function MainPage() {
         
             if (start.getTime() === end.getTime()) {
                 alert('Start date and End date cannot be equal');
+                setLoading(false)
                 return; // Prevent task creation if dates are equal
             }
         
             if (start.getTime() > end.getTime()) {
                 alert('Start date cannot be later than the end date.');
+                setLoading(false)
                 return; // Prevent task creation if dates are invalid
             }
         }
         if (endDate && endDate < new Date()) {
             alert('End date cannot be in the past.');
+            setLoading(false)
             return; // Prevent task creation if end date is in the past
         }
             // Log the dates before sending to the server
@@ -111,7 +121,7 @@ export default function MainPage() {
             status: selectedStatus
         });
         try {
-            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks`, {
+            const response = await fetch(`http://localhost:5000/api/tasks`, {
                 method: 'POST',
                 credentials: "include",
                 headers: { 
@@ -133,6 +143,9 @@ export default function MainPage() {
             if (response.ok) {
                 const newTask: Task = await response.json();
                 console.log("Newly created task:", newTask);
+                const updatedTasks = [...tasks, newTask];
+                localStorage.setItem('tasks', JSON.stringify(updatedTasks)); 
+                setTasks(updatedTasks); 
                 setTasks([...tasks, newTask]);
                 setTaskTitle('');
                 setShowOverlay(false);
@@ -155,13 +168,20 @@ export default function MainPage() {
 
     const deleteTask = async (taskId: string) => {
         try {
-            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks/${taskId}`, {
+            const response = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
 
             if (response.ok) {
-                setTasks(tasks.filter(task => task._id !== taskId));
+                // Filter out the deleted task from the current tasks
+            const updatedTasks = tasks.filter(task => task._id !== taskId);
+            
+            // Update local storage with the new task list
+            localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+
+            // Update the state
+            setTasks(updatedTasks);
             } else {
                 const errorData = await response.json();
                 console.error("Error deleting task:", errorData.message || "No message");
@@ -188,11 +208,13 @@ export default function MainPage() {
 
         if (!taskTitle || !taskToEdit) {
             alert("Task title is required!");
+            setLoading(false);
             return;
         }
         
         if (!startDate || !endDate) {
             alert('Start date and End date are both required');
+            setLoading(false);
             return;
         }
         if (startDate && endDate) {
@@ -202,21 +224,24 @@ export default function MainPage() {
         
             if (start.getTime() === end.getTime()) {
                 alert('Start date and End date cannot be equal');
+                setLoading(false);
                 return; // Prevent task creation if dates are equal
             }
         
             if (start.getTime() > end.getTime()) {
                 alert('Start date cannot be later than the end date.');
+                setLoading(false);
                 return; // Prevent task creation if dates are invalid
             }
         }
         if (endDate && endDate < new Date()) {
             alert('End date cannot be in the past.');
+            setLoading(false);
             return; // Prevent task creation if end date is in the past
         }
     
         try {
-            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/tasks/${taskToEdit._id}`, {
+            const response = await fetch(`http://localhost:5000/api/tasks/${taskToEdit._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: "include",
@@ -233,7 +258,12 @@ export default function MainPage() {
 
             if (response.ok) {
                 const updatedTask = await response.json();
-                setTasks(tasks.map(task => task._id === updatedTask._id ? updatedTask : task));
+               //Update the tasks in state
+               const updatedTasks = tasks.map(task => task._id === updatedTask._id ? updatedTask : task);
+               setTasks(updatedTasks);
+            
+                // Save the updated tasks list to local storage
+                localStorage.setItem('tasks', JSON.stringify(updatedTasks));
                 setTaskToEdit(null);
                 setTaskTitle('');
                 setShowOverlay(false);
@@ -251,6 +281,7 @@ export default function MainPage() {
     };
 
     const handleGAClick = () => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
         router.push(`/scheduled-page`);
     };
 
