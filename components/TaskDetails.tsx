@@ -2,6 +2,7 @@
 import HeaderTasks from "@/components/HeaderTasks";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Loading from "./Loading";
 
 interface Task {
     title: string;
@@ -70,28 +71,35 @@ export default function TaskDetails() {
         };
         fetchTasks();
     }, [router]);
+    //Function to determine the background color based on time left
+    const getTaskColor = (timeLeft: number) => {
+        if (timeLeft <= 24) {
+            return "text-red-600"; // Red for less than or equal to 24 hours
+        } else if (timeLeft > 24 && timeLeft <= 48) {
+            return "text-yellow-500"; // Yellow for greater than 24 and less than or equal to 48 hours
+        } else {
+            return "text-green-600"; // Green for greater than 48 hours
+        }
+    };
     
     return (
         <div>
             <HeaderTasks />
-            <div className="p-8 bg-color-zero flex flex-col items-center mt-12">
+            <div className="p-8 bg-color-zero flex flex-col items-center mt-8">
                 <h1 className="text-2xl font-bold text-color-two text-center">Tasks Details</h1>
-                {loading && <p>Loading tasks...</p>}
-                {error && <p className="text-red-500">{error}</p>}
                 <div className="mt-12 flex flex-col gap-6 lg:grid grid-cols-4">
                     {tasks.length === 0 ? (
                         <p className="text-gray-500">No tasks found.</p>
                     ) : (
                         tasks.map((task, index) => (
                             <div key={task._id} className={`p-4 bg-gray-200 rounded-md shadow-md my-2 w-[15rem] h-auto text-center flex flex-col gap-3 py-6`}>
-                                <p className="bg-color-two font-semibold text-white flex self-center rounded-full w-[2rem] h-[2rem] justify-center items-center">{index + 1}</p>
                                 <h2 className="text-lg text-center font-semibold px-12 text-color-two">{task.title}</h2>
-                                <p>Priority: {task.priority}</p>
-                                <p>Status: {task.status}</p>
                                 <p>{`Start Date: ${task.startDate ? task.startDate.toLocaleDateString() : 'N/A'}`}</p>
                                 <p>{`End Date: ${task.endDate ? task.endDate.toLocaleDateString() : 'N/A'}`}</p>
                                 <p>{`Duration: ${task.estimatedDuration}`} hours</p>
-                                <p>{`Time Left: ${task.timeLeft}`} hours</p>
+                                <p>Time Left: <span className={`${getTaskColor(task.timeLeft)}`}>{`${task.timeLeft}`}  hours</span></p>
+                                <p>Priority: {task.priority}</p>
+                                <p>Status: {task.status}</p>
                             </div>
                         ))
                     )}

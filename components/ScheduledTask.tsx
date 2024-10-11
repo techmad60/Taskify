@@ -72,19 +72,6 @@ export default function ScheduledTasksPage() {
         fetchOptimizedTasks();
     }, []);
 
-
-    // Function to determine the background color based on time left
-    // const getTaskColor = (timeLeft: number) => {
-    //     if (timeLeft <= 24) {
-    //         return "text-red-600"; // Red for less than or equal to 24 hours
-    //     } else if (timeLeft > 24 && timeLeft <= 48) {
-    //         return "text-yellow-500"; // Yellow for greater than 24 and less than or equal to 48 hours
-    //     } else {
-    //         return "text-green-600"; // Green for greater than 48 hours
-    //     }
-    // };
-
-
     return (
         <div>
             <HeaderTasks />
