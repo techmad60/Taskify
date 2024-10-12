@@ -49,7 +49,7 @@ export default function ResetPassword() {
 
         try {
             // Send request to reset password
-            const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/reset-password`, {
+            const response = await fetch(`https://taskify-backend-100.up.railway.app/api/reset-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token, newPassword }), // Include token and new password in request body

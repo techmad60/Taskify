@@ -40,7 +40,7 @@ export default function MainPage() {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/tasks`, {
+                const response = await fetch(`https://taskify-backend-100.up.railway.app/api/tasks`, {
                     method: 'GET',
                     credentials: 'include',
                     headers: {
@@ -121,7 +121,7 @@ export default function MainPage() {
             status: selectedStatus
         });
         try {
-            const response = await fetch(`http://localhost:5000/api/tasks`, {
+            const response = await fetch(`https://taskify-backend-100.up.railway.app/api/tasks`, {
                 method: 'POST',
                 credentials: "include",
                 headers: { 
@@ -168,7 +168,7 @@ export default function MainPage() {
 
     const deleteTask = async (taskId: string) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+            const response = await fetch(`https://taskify-backend-100.up.railway.app/api/tasks/${taskId}`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
@@ -241,7 +241,7 @@ export default function MainPage() {
         }
     
         try {
-            const response = await fetch(`http://localhost:5000/api/tasks/${taskToEdit._id}`, {
+            const response = await fetch(`https://taskify-backend-100.up.railway.app/api/tasks/${taskToEdit._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: "include",

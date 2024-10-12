@@ -28,7 +28,7 @@ export default function ScheduledTasksPage() {
             setError(null);
 
             try {
-                const response = await fetch('http://localhost:5000/api/tasks/schedule', {
+                const response = await fetch('https://taskify-backend-100.up.railway.app/api/tasks/schedule', {
                     method: 'GET',
                     credentials: 'include',
                 });

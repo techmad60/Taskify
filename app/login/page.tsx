@@ -6,7 +6,7 @@ import Logo from "@/components/Logo";
 import { useRouter } from 'next/navigation'; 
 import { poppinsFont } from "@/fonts/fonts";
 import FormButton from "@/components/FormButton";
-import Cookies from 'js-cookie'; // Add this import
+
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +33,7 @@ export default function LoginPage() {
   
     try {
       // Send password reset request
-      const response = await fetch(`https://taskify-backend-nq1q.onrender.com/api/request-reset`, {
+      const response = await fetch(`https://taskify-backend-100.up.railway.app/api/request-reset`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export default function LoginPage() {
     }
     
     try {
-      const response = await fetch(`http://localhost:5000/api/login`, {
+      const response = await fetch(`https://taskify-backend-100.up.railway.app/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
