@@ -2,6 +2,7 @@
 import HeaderTasks from "@/components/HeaderTasks";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Loading from "./Loading";
 
 interface Task {
@@ -73,7 +74,10 @@ export default function TaskDetails() {
     }, [router]);
     //Function to determine the background color based on time left
     const getTaskColor = (timeLeft: number) => {
-        if (timeLeft <= 24) {
+        if (timeLeft === 0 ) {
+            return "text-slate-400"
+        }
+        else if (timeLeft <= 24) {
             return "text-red-600"; // Red for less than or equal to 24 hours
         } else if (timeLeft > 24 && timeLeft <= 48) {
             return "text-yellow-500"; // Yellow for greater than 24 and less than or equal to 48 hours
@@ -87,19 +91,39 @@ export default function TaskDetails() {
             <HeaderTasks />
             <div className="p-8 bg-color-zero flex flex-col items-center mt-8">
                 <h1 className="text-2xl font-bold text-color-one text-center">Tasks Details</h1>
-                <div className="mt-12 flex flex-col gap-6 lg:grid grid-cols-4">
+                <div className="mt-12 flex flex-col gap-6 lg:grid grid-cols-3 xl:grid-cols-3">
                     {tasks.length === 0 ? (
-                        <p className="text-gray-500">No tasks found.</p>
+                        <p className="text-gray-500">Loading...</p>
                     ) : (
                         tasks.map((task) => (
-                            <div key={task._id} className={`p-4 bg-gray-200 rounded-md shadow-md my-2 w-[15rem] h-auto text-center flex flex-col gap-3 py-6`}>
+                            <div key={task._id} className={`p-4 bg-gray-200 rounded-md shadow-md my-2 w-[17rem] h-auto  flex flex-col  gap-3 py-6`}>
                                 <h2 className="text-lg text-center font-semibold px-12 text-color-two">{task.title}</h2>
-                                <p>{`Start Date: ${task.startDate ? task.startDate.toLocaleDateString() : 'N/A'}`}</p>
-                                <p>{`End Date: ${task.endDate ? task.endDate.toLocaleDateString() : 'N/A'}`}</p>
-                                <p>{`Duration: ${task.estimatedDuration}`} hours</p>
-                                <p>Time Left: <span className={`${getTaskColor(task.timeLeft)}`}>{`${task.timeLeft}`}  hours</span></p>
-                                <p>Priority: {task.priority}</p>
-                                <p>Status: {task.status}</p>
+                                <div className="flex items-center gap-3 border-b border-slate-300 pb-2 px-4">
+                                    <Image src={"/images/start-date.svg"} alt="Start Date Button" width={20} height={20} />
+                                    <p>{`Start Date: ${task.startDate ? task.startDate.toLocaleDateString() : 'N/A'}`}</p>
+                                </div>
+                                <div className="flex items-center gap-3 border-b border-slate-300 pb-2 px-4">
+                                    <Image src={"/images/end-date.svg"} alt="End Date Button" width={20} height={20} />
+                                    <p>{`End Date: ${task.endDate ? task.endDate.toLocaleDateString() : 'N/A'}`}</p>
+                                </div>
+                                <div className="flex items-center gap-3 border-b border-slate-300 pb-2 px-4">
+                                    <Image src={"/images/duration.svg"} alt="Duration Button" width={20} height={20} />
+                                    <p>{`Duration: ${task.estimatedDuration}`} hours</p>
+                                </div>
+                               
+                                <div className="flex items-center gap-3 border-b border-slate-300 pb-2 px-4">
+                                    <Image src={"/images/clock.svg"} alt="Duration Button" width={20} height={20} />
+                                    <p>Time Left: <span className={`${getTaskColor(task.timeLeft)}`}>{`${task.timeLeft}`}  hours</span></p>
+                                </div>
+                                <div className="flex items-center gap-3 border-b border-slate-300 pb-2 px-4">
+                                    <Image src={"/images/priority.svg"} alt="Duration Button" width={20} height={20} />
+                                    <p>Priority: {task.priority}</p>
+                                </div>
+                               
+                                <div className="flex items-center gap-3 border-b border-slate-300 pb-2 px-4">
+                                    <Image src={"/images/status.svg"} alt="Duration Button" width={20} height={20} />
+                                    <p>Status: {task.status}</p>
+                                </div> 
                             </div>
                         ))
                     )}
